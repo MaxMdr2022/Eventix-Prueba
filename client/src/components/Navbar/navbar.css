@@ -1,0 +1,67 @@
+*{
+    text-decoration: none;
+}
+
+.navbar {
+    
+    display: flex;
+    justify-content: space-between;
+    height: max-content;
+    box-shadow: rgb(255, 255, 255);
+    box-shadow: 0 15px 25px rgba(129, 124, 124, 0.2);
+    background-color: black;
+}
+
+.left {
+    color:white;
+    align-items: center;
+    display: flex;
+    width: 20%;
+    justify-content: space-between;
+}
+
+.right {
+    
+    align-items: center;
+    display: flex;
+    gap: 10px;
+}
+
+
+#menu{
+
+    display: flex;
+    position: relative;
+    height: 50px;
+    width: auto;
+    background-color: black;
+}
+
+#filter{
+    position:absolute;
+    right: -100%;
+    transition: all .8s;
+    /* overflow: hidden; */
+}
+
+
+
+#mostrar-menu:checked ~#filter{
+
+    right: 0%;
+
+}
+
+
+.filter{
+
+    /* position: absolute; */
+    display: flex;
+    justify-content: flex-end;
+    background-color: black;
+    height: 50px;
+    /* top: -50px; */
+    /* top:300% */
+
+    /* right: -200px; */
+}

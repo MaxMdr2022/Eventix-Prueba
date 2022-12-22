@@ -1,0 +1,36 @@
+.aboutUs {
+    width: 400px;
+    color: black;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.images {
+    height: 200px;
+    display: flex;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.title {
+    width: 400px;
+    color: black;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+/* .react {
+    image-rendering: url('../../assets/react.png');
+} */
+
+.members {
+    width: 400px;
+    color: black;
+    font-size: 20px;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
