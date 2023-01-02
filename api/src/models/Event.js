@@ -17,7 +17,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     image: {
-      type: DataTypes.STRING, 
+      type: DataTypes.BLOB, 
       allowNull: false,
     },
     location: {
@@ -25,7 +25,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     price: {
-      type: DataTypes.STRING, 
+      type: DataTypes.ARRAY(DataTypes.JSON), 
       allowNull: false,
     },
     description: {

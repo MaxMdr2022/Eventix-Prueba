@@ -11,14 +11,25 @@ export default function aboutUs() {
           </div>
           <div>
           <h1 className='title'>Used Technologies</h1>
-          <h2 className='aboutUs'>React</h2>
-          <img className='images' src='https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/React.svg/800px-React.svg.png' alt='' />
-          <h2 className='aboutUs'>Redux</h2>
-          <img className='images' src='https://img.icons8.com/color/480/redux.png' alt='' />
-          <h2 className='aboutUs'>Sequelize</h2>
-          <img className='images' src='https://assets.stickpng.com/images/58482ee4cef1014c0b5e4a75.png' alt='' />
-          <h2 className='aboutUs'>Node.js</h2>
-          <img className='images' src='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/1200px-Node.js_logo.svg.png' alt='' />
+          <div className='tech'>
+            <div>
+              <h2 className='aboutUs'>React</h2>
+              <img className='images' src='https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/React.svg/800px-React.svg.png' alt='' />
+            </div>
+            <div>
+              <h2 className='aboutUs'>Redux</h2>
+              <img className='images' src='https://img.icons8.com/color/480/redux.png' alt='' />
+            </div>
+            <div>          
+              <h2 className='aboutUs'>Sequelize</h2>
+              <img className='images' src='https://assets.stickpng.com/images/58482ee4cef1014c0b5e4a75.png' alt='' />
+            </div>
+            <div>
+              <h2 className='aboutUs'>Node.js</h2>
+              <img className='images' src='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/1200px-Node.js_logo.svg.png' alt='' />
+            </div>
+          </div>
+          
           </div>
           <div>
             <h1 className='title'>Members</h1>

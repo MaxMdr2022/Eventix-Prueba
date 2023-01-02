@@ -5,7 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { filter } from '../../Redux/actions';
 
 
-export default function Filters() {    //npm i react-datepicker
+export default function Filters(check) {    //npm i react-datepicker
 
 
   const dispatch = useDispatch();
@@ -41,6 +41,42 @@ export default function Filters() {    //npm i react-datepicker
 
   });
 
+  //---------------------------------------------------
+
+  useEffect(()=>{
+
+    dispatch(filter(state));; // <--------------------
+
+  }, [dispatch, state]);
+
+  //------------------------------------------------------
+  // console.log(check);
+  //----------------------reset--------------------------
+  if(!check){
+
+    setState({
+      day:  "",
+      month: "",
+      year: "",
+      fDate: false,
+      
+      fName: false,
+      name: "",
+      
+      fPrice: false,
+      price:[],
+      
+      
+      fAge: false,
+      age:"",
+      
+      fLocation:false,
+      location:"",
+
+      fSort: false,
+      sort:""
+    })
+  };
   //--------------DATE-------------------------------------
   function onChangeDate (date){
 
@@ -178,22 +214,14 @@ export default function Filters() {    //npm i react-datepicker
 
     setState({
       ...state,
-      fSort: true,
+      fSort: e.target.value === "notSort" ? false : true,
       sort: e.target.value,
     })
   };
 
   // console.log("estado",state);
 
- //---------------------------------------------------
-
-  useEffect(()=>{
-
-    dispatch(filter(state));; // <--------------------
-
-  }, [dispatch, state]);
-
- //------------------------------------------------------
+ 
 
 
   return (

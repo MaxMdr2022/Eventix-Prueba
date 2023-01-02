@@ -111,44 +111,40 @@ const filterByPrice = async(price, state) =>{ //price tiene que ser un [min, max
 
     // const {price} = prices;    // COMENTARRR AL USAR COMBINADOOOO     <------------------------------------------
 
-    // console.log(price[1]);
+    // console.log(typeof price[1]);//      "343"  == 343 true // "asd" == asd false
 
-    if(price[0] === "0"){
+    if(price[0] == Number(price[0]) && price[1] == Number(price[1])){
 
-        
+
+        if(price[0] === "0"){
+
+            
+            eventsFilter = events.filter( e => {
+                
+
+                console.log(e.price?.map(el=>el.precio.replace(/\D/g, "")))  
+
+
+                return e.price?.filter(el=>Number(el.precio.replace(/\D/g, "")) <= Number(price[1])).length > 0 ? true : false 
+                
+                || e.price?.filter(e=>e.precio == "Entrada Liberada" ).length > 0 ? true : false  
+            
+
+            });
+            
+            return eventsFilter.length > 0 ? eventsFilter : "There are no tickets in that price range.";
+        }
+
         eventsFilter = events.filter( e => {
+
+            return  e.price?.filter(el=>el.precio === "Entrada Liberada"? false :  Number(el.precio.replace(/\D/g, "")) <= Number(price[1])).length > 0 ? true : false 
             
-
-            console.log(e.price?.map(el=>el.precio.replace(/\D/g, "")))  
-
-
-            return e.price?.filter(el=>Number(el.precio.replace(/\D/g, "")) <= Number(price[1])).length > 0 ? true : false 
-            
-            || e.price?.filter(e=>e.precio == "Entrada Liberada" ).length > 0 ? true : false  
+            && e.price?.filter(el=>el.precio === "Entrada Liberada"? false : Number(el.precio.replace(/\D/g, "")) >= Number(price[0])).length > 0 ? true : false 
         
-
         });
-        
-        return eventsFilter.length > 0 ? eventsFilter : "There are no tickets in that price range.";
+
     }
 
-    // eventsFilter = events.filter( e => {
-        
-    //     // console.log("1: ", e.price?.filter(el=>Number(el.precio.replace(/\D/g, "")) <= Number(price[1])).length > 0 ? true : false );
-
-    //     // console.log("el 1: ", e.price?.filter(el=>Number(el.precio.replace(/\D/g, ""))));
-        
-    //     // console.log("2: ", e.price?.filter(el=> Number(el.precio.replace(/\D/g, "")) >= Number(price[0])).length > 0 ? true : false );
-
-    //     // console.log("el 2: ", e.price?.filter(el=> Number(el.precio.replace(/\D/g, ""))));
-
-    //     // console.log("total ", e.price?.filter(el=>Number(el.precio.replace(/\D/g, "")) <= Number(price[1])).length > 0 ? true : false  && e.price?.filter(el=> Number(el.precio.replace(/\D/g, "")) >= Number(price[0])).length > 0 ? true : false );
-
-    //     return  e.price?.filter(el=>Number(el.precio.replace(/\D/g, "")) <= Number(price[1])).length > 0 ? true : false 
-        
-    //     && e.price?.filter(el=> Number(el.precio.replace(/\D/g, "")) >= Number(price[0])).length > 0 ? true : false 
-    
-    // });
 
     if(!eventsFilter.length > 0){
 

@@ -1,8 +1,10 @@
 import React, { useEffect, useState }from 'react';
 import { searchEventById } from '../../Redux/actions';
 import { useSelector, useDispatch } from 'react-redux';
-import {  useHistory, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
+import Map from '../Map/Map';
 import { payCrypto } from '../../Redux/actions';
+
 
 export default function Detail() {
   const eventShowed = useSelector(state => state.events)
@@ -20,7 +22,7 @@ export default function Detail() {
     eventShowed.shift()
     return history.goBack()
   }
-  // console.log(eventShowed[0])
+  
 
   function submitData (e){
 
@@ -29,18 +31,23 @@ export default function Detail() {
       return history.push("/");
     };
 
-    /*
-    precio: e.precio, cantidad: cantidad,date: eventShowed[0].date,
-    */
     let arr = [];
 
-    arr.push( e.tipoDeTicket, "$ "+ e.precio,"cantidad: "+ cantidad + " ticket", eventShowed[0].date[0],"Ubicacion: "+ eventShowed[0].location, eventShowed[0].description )
+    arr.push( e.tipoDeTicket, "$ "+ e.precio,"cantidad: "+ cantidad + " ticket", eventShowed[0].date[0],"Ubicacion: "+ eventShowed[0].location)
 
-    console.log(arr.join(" "));
+    if(arr.join(" ").length > 200 ){
+
+      arr = [];
+
+      arr.push(  "$ "+ e.precio,"cantidad: "+ cantidad + " ticket", eventShowed[0].date[0])
+    };
+
+
+    console.log(arr.join(" ").length);
 
     const datosPago = {
       
-      total: Math.ceil(Number(e.precio) * cantidad / 330),
+      total: (Number(e.precio) * cantidad / 400).toPrecision(3),
       name: eventShowed[0].name,
       description: arr.join(" "),
 
@@ -53,11 +60,19 @@ export default function Detail() {
 
   };
 
+  
+  function buttonRest (){
+    
+    if(cantidad > 1){
+      return setCantidad(cantidad - 1);
+    };
+  };
 
-  function changeCantidad (e){
+  function buttonSum (){
 
-    setCantidad(e.target.value)
-  }
+    return setCantidad( cantidad +1);
+  };
+
 
   return (
     <div>
@@ -70,24 +85,28 @@ export default function Detail() {
 
       <div>
         <div>
-          <img src={eventShowed[0].image} alt= "" />
+          <img src={eventShowed.length ? eventShowed[0].image : null} alt= "" />
         </div>
 
         <div>
-          <p>{eventShowed[0].name}</p>
-          <p>Date: {eventShowed[0].date}</p>
-          <p>Location: {eventShowed[0].location}</p>
+
+          
+          <p>{eventShowed.length ? eventShowed[0].name : null}</p> 
+          <p>{eventShowed.length ? eventShowed[0].location : null}</p>
+
+          {console.log(eventShowed)}
          {
-          eventShowed[0].price.length > 0? eventShowed[0].price.map((e, i) => 
+          eventShowed[0] ? eventShowed[0].price.map((e, i) => 
             <div key={i}>
               
               <p>Type Ticket: {e.tipoDeTicket}</p>
-              {e.precio === "Entrada Liberada" ? <p>Price: Free</p> :<p>Price: ${Number(e.precio) * cantidad} | U$D {Math.ceil(Number(e.precio) * cantidad / 330)}</p>}
+              {e.precio === "Entrada Liberada" ? <p>Price: Free</p> :<p>Price: ${Number(e.precio) * cantidad} | U$D {(Number(e.precio) * cantidad / 400).toPrecision(3)}</p>}
               <button onClick={()=>submitData(e)}>comprar</button>
-              <input type={"text"} placeholder={"cantidad de tickets"} value={cantidad} onChange={(e)=>changeCantidad(e)} />
+              <button hidden={cantidad > 1 ? false : true} onClick={()=>buttonRest()}>-</button>
+              <button onClick={()=>buttonSum()}>+</button>
+              {cantidad > 1 ? <span> {cantidad} Tickets</span>: <span> {cantidad} Ticket</span>}
               
             </div>
-            
           ) : 
           <p>Tickets Sold Out  :´(</p>
          }
@@ -95,8 +114,17 @@ export default function Detail() {
 
       </div>
       <div>
-        <p>Description evvent: {eventShowed[0].description}</p>
+        <p>Description event: {eventShowed[0]?.description}</p>
       </div>
+
+      <Map direction={eventShowed.length ? eventShowed[0].locationMap : null}/>
+
+      {/* 
+      <div>
+        <Link to={'/event/sale'}><button>BUY TICKETS</button></Link>
+      </div> 
+      */}
+
     </div>
   )
-}
+};

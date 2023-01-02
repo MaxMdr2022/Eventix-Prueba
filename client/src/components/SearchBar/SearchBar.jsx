@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { getNameEvent } from '../../Redux/actions'
 import styles from './searchbar.module.css'
 import search from '../../assets/search.svg'
-import Sort from '../Sort/Sort'
+
 
 
 export default function SearchBar() {
@@ -33,11 +33,6 @@ export default function SearchBar() {
   return (
 
     <div>
-
-      <div>
-        {/* <Sort/>*/}
-      </div>
-
 
       <div>
 

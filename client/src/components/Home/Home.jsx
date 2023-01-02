@@ -20,7 +20,7 @@ return history.push("/")
   if (/unauthorized/.test(window.location.href)) {
     return (
     <div>
-      <p>A verifitacion email has been sent to your email. After verification <a style={{color:"white", textDecoration:"underline"}} href="/profile">click here</a> to continue :D</p>
+      <p>A verification email has been sent to your email. After verification <a style={{color:"white", textDecoration:"underline"}} href="/profile">click here</a> to continue :D</p>
       <p>¿Can´t verify? Start over by <button onClick={() => handleClick()}>Clicking here</button></p>
     </div>);
   }

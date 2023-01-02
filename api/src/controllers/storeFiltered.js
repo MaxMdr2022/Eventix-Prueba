@@ -6,10 +6,13 @@ const storeFiltered = async(body)=>{
 
     let state = [];
 
+    let filter = true;
+
     if(!body.fDate && !body.fName && !body.fAge && !body.fPrice && !body.fLocation && !body.fSort){
 
-        const events = await getEvents();
-        return events;
+        // const events = await getEvents();
+        // return events;
+        filter = false;
     };
     
     if(body.fDate == true){
@@ -91,7 +94,7 @@ const storeFiltered = async(body)=>{
         state = await sorts(sort, state);
     }
 
-    if(!state.length > 0){
+    if(!state.length > 0 && filter){
 
         return "error1812"
     }

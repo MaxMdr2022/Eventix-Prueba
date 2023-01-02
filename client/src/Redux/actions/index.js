@@ -15,13 +15,11 @@ export const GET_NAME_EVENT = "GET_NAME_EVENT";
 
 export const CREATE_EVENT = "CREATE_EVENT";
 
-export const SORT = "SORT";
-
 export const GET_ALL_EVENT_LIST = 'GET_ALL_EVENT_LIST';
 
 export const PAY_CRYPTO = "PAY_CRYPTO";
 //-------------------------------------------------
-const URL = "http://localhost:3001";
+// const URL = "http://localhost:3001";
 //-------------------------------------------------
 
 
@@ -32,7 +30,7 @@ export const getAllEvents = (page) => {
 
     try {
 
-      const event = await axios.get(`${URL}/events/page/${page}`);
+      const event = await axios.get(`events/page/${page}`);
 
       dispatch({
 
@@ -56,7 +54,7 @@ export const getAllEventList = () => {
 
     try {
 
-      const event = await axios.get(`${URL}/events/allevents`);
+      const event = await axios.get(`events/allevents`);
 
       dispatch({
 
@@ -81,7 +79,7 @@ export const getNameEvent = (name) => {
 
     try {
 
-      const event = await axios.get(`${URL}/events/page/:page?name=${name}`);
+      const event = await axios.get(`events/page/:page?name=${name}`);
 
       dispatch({
 
@@ -106,7 +104,7 @@ export const orderByName = (order) => {
 
     try {
 
-      const eventOrder = await axios.get(`${URL}/order`, order);
+      const eventOrder = await axios.get(`order`, order);
 
       dispatch({
 
@@ -131,7 +129,7 @@ export const filter = (date) => {
 
     try {
       // console.log("action",date);
-      const eventDate = await axios.post(`${URL}/filters`, date);
+      const eventDate = await axios.post(`filters`, date);
 
       dispatch({
 
@@ -154,8 +152,8 @@ export const searchEventById = (id) => {
   return async function (dispatch){
     try {
     
-      const eventDetailed = await axios.get(URL + `/events/${id}`)
-      console.log(eventDetailed.data)
+      const eventDetailed = await axios.get(`/events/${id}`)
+      // console.log(eventDetailed.data)
       dispatch({
         type: GET_EVENT_ID,
         payload: eventDetailed.data
@@ -177,7 +175,7 @@ export const createEvent = (data) => {
 
     try {
       
-      const event = await axios.post(`${URL}/events`, data);
+      const event = await axios.post(`events`, data);
 
       dispatch({
 
@@ -196,39 +194,14 @@ export const createEvent = (data) => {
   };
 };
 
-export const sort = (value) =>{
-
-  return async function (dispatch){
-
-    try {
-      
-      const eventSort = await axios.get(`${URL}/events/order/`+ value);
-
-      dispatch({
-
-        type: SORT,
-        payload: eventSort.data
-      })
-
-    } catch (error) {
-  
-      dispatch({
-
-        type: ERROR,
-        payload: error.message
-      })
-    }
-  };
-};
-
 export const payCrypto = (data) =>{
 
   return async function (dispatch){
 
     try {
-      console.log("action", data);
-      // const {precio,cantidad,total,name,date,img} = data
-      await axios.post(`${URL}/paycrypto/create-charge`,data );
+      // console.log("action", data);
+      
+      await axios.post(`paycrypto/create-charge`,data );
 
     } catch (error) {
      

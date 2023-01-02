@@ -17,8 +17,8 @@ route.get(`/page/:page`,async(req,res)=>{         // GET http://localhost:3001/e
             :
             res.status(404).json({msg : `Can´t find event ${name}`})
         } else {
-            const lastevent = page*5
-            const currentEvents = event.slice(lastevent - 5, lastevent)
+            const lastevent = page*4
+            const currentEvents = event.slice(lastevent - 4, lastevent)
             // console.log(currentEvents)
             res.status(200).json(currentEvents);
         }
