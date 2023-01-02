@@ -1,24 +1,24 @@
-const {Router} = require("express");
-// const initialization = require("../../../apiDev/server");
-// const getApi = require("../../../apiDev/API");
+// const {Router} = require("express");
+// // const initialization = require("../../../apiDev/server");
+// // const getApi = require("../../../apiDev/API");
 
-const route = Router();
+// const route = Router();
 
 
-route.get("/", async(req,res)=>{
+// route.get("/", async(req,res)=>{
 
-    try {
+//     try {
 
-        // const api = await initialization();
+//         // const api = await initialization();
 
-        // const api = await getApi();
+//         // const api = await getApi();
         
-        // res.status(200).json(api);
+//         // res.status(200).json(api);
 
-    } catch (error) {
+//     } catch (error) {
         
-        res.status(500).send(error.message);
-    };
-});
+//         res.status(500).send(error.message);
+//     };
+// });
 
-module.exports = route; 
+// module.exports = route; 

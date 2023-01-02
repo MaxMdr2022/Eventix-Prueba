@@ -1,10 +1,10 @@
-const getApi = require("../../../apiDev/API");
+// const getApi = require("../../../apiDev/API");
 const {Event}= require("../db");
 
 
 const getEvents = async()=>{
 
-    const api = await getApi();
+    // const api = await getApi();
     const eventDB = await Event.findAll();
     let id = 1;
 
