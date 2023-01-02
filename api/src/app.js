@@ -14,9 +14,7 @@ server.name = 'API';
 
 
 const corsOptions ={
-  origin:'*', 
-  credentials:true,            //access-control-allow-credentials:true
-  optionSuccessStatus:200,
+  origin:true,
 }
 
 server.use(cors(corsOptions));
