@@ -12,7 +12,14 @@ const server = express();
 
 server.name = 'API';
 
-server.use(cors());
+
+const corsOptions ={
+  origin:'*', 
+  credentials:true,            //access-control-allow-credentials:true
+  optionSuccessStatus:200,
+}
+
+server.use(cors(corsOptions));
 
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 server.use(bodyParser.json({ limit: '50mb' }));
