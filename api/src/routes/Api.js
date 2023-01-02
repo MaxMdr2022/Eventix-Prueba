@@ -1,6 +1,6 @@
 const {Router} = require("express");
 // const initialization = require("../../../apiDev/server");
-const getApi = require("../../../apiDev/API");
+// const getApi = require("../../../apiDev/API");
 
 const route = Router();
 
@@ -11,9 +11,9 @@ route.get("/", async(req,res)=>{
 
         // const api = await initialization();
 
-        const api = await getApi();
+        // const api = await getApi();
         
-        res.status(200).json(api);
+        // res.status(200).json(api);
 
     } catch (error) {
         
