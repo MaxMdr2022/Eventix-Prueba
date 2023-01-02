@@ -42,9 +42,9 @@ export default function Navbar() {
         </div>
         
 
-        {/*<div className="right">
+        <div className="right">
           <LoginButton />
-  </div>*/}
+  </div>
 
       </div>
 
