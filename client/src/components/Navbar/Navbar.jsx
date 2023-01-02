@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 import SearchBar from "../SearchBar/SearchBar";
 import "./navbar.css";
-// import {aboutUs} from "../About Us/AboutUs";
+import {aboutUs} from "../About Us/AboutUs";
 
 import Filters from "../Filters/Filters";
 
@@ -32,7 +32,7 @@ export default function Navbar() {
           </a>
           <a href="/aboutUs">
             <h3>About us</h3>
-            {/* <aboutUs/> */}
+             <aboutUs/> 
           </a>
           <a href="/createevents">Create Events</a>
           
