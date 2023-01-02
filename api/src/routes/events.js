@@ -5,7 +5,7 @@ const sort = require("../controllers/sort");
 
 const route = Router();
 
-route.get(`/page/:page`,async(req,res)=>{         // GET http://localhost:3001/events
+route.get(`/page/:page`,async(req,res)=>{         // GET http://localhost:3001/events/allevents
     const {name} = req.query
     const {page} = req.params
         try {
