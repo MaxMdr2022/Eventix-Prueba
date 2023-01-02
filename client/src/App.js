@@ -9,7 +9,7 @@ import createEvent from './components/createEvent/CreateEvent';
 
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:3001/";
+axios.defaults.baseURL = "https://eventix-prueba-production.up.railway.app/";//http://localhost:3001/
 
 function App() {
   return (
