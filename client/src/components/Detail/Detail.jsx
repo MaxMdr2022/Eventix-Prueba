@@ -139,13 +139,13 @@ export default function Detail() {
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         contentLabel="Example Modal">
-          <div>
+          <div color='black' align="center">
 
             <h2>Eventix</h2>
             <h3>{eventShowed[0]?.name}</h3>
             {cantidad > 1 ? <span> {cantidad} Tickets</span>: <span> {cantidad} Ticket</span>}
-            <p>$ {info.precio * cantidad}</p>
-            <p>u$d {Number(info.precio) * cantidad / 400}</p>
+            <p>ARS$ {info.precio * cantidad}</p>
+            <p>US$ {Number(info.precio) * cantidad / 400}</p>
             <p>You will be redirected to the Coinbase payment gateway</p>
             <a href={`${url}`}><button>Buy Ticket</button></a>
             <button onClick={closeModal}>cancel</button>
