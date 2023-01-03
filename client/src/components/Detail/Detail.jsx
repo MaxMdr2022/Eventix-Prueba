@@ -5,6 +5,7 @@ import { Link, useHistory, useParams } from 'react-router-dom';
 import Map from '../Map/Map';
 import { payCrypto } from '../../Redux/actions';
 import Modal from 'react-modal';
+import "./Detail.css";
 
 export default function Detail() {
   const eventShowed = useSelector(state => state.events)
@@ -14,7 +15,7 @@ export default function Detail() {
   const { id } = useParams()
   const [cantidad, setCantidad] = useState(1);
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [info, setInfo] = useState({cantidad:1, precio:0 })
+  const [info, setInfo] = useState({tipoTicket: "", precio:0 })
 
   useEffect(() => {
     dispatch(searchEventById(id))
@@ -60,7 +61,7 @@ export default function Detail() {
     };
 
     setInfo({
-      cantidad: cantidad,
+      tipoTicket: e.tipoDeTicket,
       precio: e.precio 
     })
     openModal();
@@ -139,10 +140,11 @@ export default function Detail() {
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         contentLabel="Example Modal">
-          <div color='black' align="center">
+          <div className='modal' >
 
-            <h2 color='black'>Eventix</h2>
+            <h2>Eventix</h2>
             <h3>{eventShowed[0]?.name}</h3>
+            <p>Type Ticket: {info.tipoTicket}</p>
             {cantidad > 1 ? <span> {cantidad} Tickets</span>: <span> {cantidad} Ticket</span>}
             <p>ARS$ {info.precio * cantidad}</p>
             <p>US$ {Number(info.precio) * cantidad / 400}</p>
