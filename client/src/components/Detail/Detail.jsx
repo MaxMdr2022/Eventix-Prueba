@@ -141,7 +141,7 @@ export default function Detail() {
         contentLabel="Example Modal">
           <div color='black' align="center">
 
-            <h2>Eventix</h2>
+            <h2 color='black'>Eventix</h2>
             <h3>{eventShowed[0]?.name}</h3>
             {cantidad > 1 ? <span> {cantidad} Tickets</span>: <span> {cantidad} Ticket</span>}
             <p>ARS$ {info.precio * cantidad}</p>
