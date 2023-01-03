@@ -115,6 +115,7 @@ export default function Detail() {
       </div>
       <div>
         <p>Description event: {eventShowed[0]?.description}</p>
+        <a href='https://commerce.coinbase.com/charges/Q6AR8P3V'>link</a>
       </div>
 
       <Map direction={eventShowed.length ? eventShowed[0].locationMap : null}/>
