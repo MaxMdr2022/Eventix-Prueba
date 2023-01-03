@@ -14,6 +14,7 @@ export default function Detail() {
   const { id } = useParams()
   const [cantidad, setCantidad] = useState(1);
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [info, setInfo] = useState({cantidad:1, precio:0 })
 
   useEffect(() => {
     dispatch(searchEventById(id))
@@ -45,7 +46,7 @@ export default function Detail() {
     };
 
 
-    console.log(arr.join(" ").length);
+    // console.log(arr.join(" ").length);
 
     const datosPago = {
       
@@ -58,6 +59,10 @@ export default function Detail() {
       // id_user:
     };
 
+    setInfo({
+      cantidad: cantidad,
+      precio: e.precio 
+    })
     openModal();
     return dispatch(payCrypto(datosPago));
 
@@ -134,9 +139,19 @@ export default function Detail() {
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         contentLabel="Example Modal">
+          <div>
+
+            <h2>Eventix</h2>
+            <h3>{eventShowed[0]?.name}</h3>
+            {cantidad > 1 ? <span> {cantidad} Tickets</span>: <span> {cantidad} Ticket</span>}
+            <p>$ {info.precio * cantidad}</p>
+            <p>u$d {Number(info.precio) * cantidad / 400}</p>
+            <p>You will be redirected to the Coinbase payment gateway</p>
+            <a href={`${url}`}><button>Buy Ticket</button></a>
+            <button onClick={closeModal}>cancel</button>
+
+          </div>
           
-          <a href={`${url}`}>{url}</a>
-          <button onClick={closeModal}>close</button>
         </Modal>   
 
 
