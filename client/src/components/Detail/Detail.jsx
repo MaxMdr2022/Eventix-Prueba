@@ -4,14 +4,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import Map from '../Map/Map';
 import { payCrypto } from '../../Redux/actions';
-
+import Modal from 'react-modal';
 
 export default function Detail() {
   const eventShowed = useSelector(state => state.events)
-  const history = useHistory()
+  const url = useSelector( s => s.payCryptoURL);
+  const history = useHistory() 
   const dispatch = useDispatch()
   const { id } = useParams()
   const [cantidad, setCantidad] = useState(1);
+  const [modalIsOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     dispatch(searchEventById(id))
@@ -56,6 +58,7 @@ export default function Detail() {
       // id_user:
     };
 
+    openModal();
     return dispatch(payCrypto(datosPago));
 
   };
@@ -73,6 +76,13 @@ export default function Detail() {
     return setCantidad( cantidad +1);
   };
 
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
 
   return (
     <div>
@@ -115,10 +125,21 @@ export default function Detail() {
       </div>
       <div>
         <p>Description event: {eventShowed[0]?.description}</p>
-        <a href='https://commerce.coinbase.com/charges/Q6AR8P3V'>link</a>
+        
       </div>
 
       <Map direction={eventShowed.length ? eventShowed[0].locationMap : null}/>
+
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="Example Modal">
+          
+          <a href={`${url}`}>{url}</a>
+          <button onClick={closeModal}>close</button>
+        </Modal>   
+
+
 
       {/* 
       <div>
