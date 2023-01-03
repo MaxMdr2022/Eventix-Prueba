@@ -43,7 +43,8 @@ route.post("/create-charge", async(req,res)=>{   // ruta de pago http://localhos
 
     console.log("url::::",url);
 
-    res.redirect(url); // redireccionamos a la url de la pasarela de pago. 
+    res.send(url)
+    // res.redirect(url); // redireccionamos a la url de la pasarela de pago. 
    
 });
 
