@@ -94,9 +94,6 @@ route.post("/payment-handler", (req,res)=>{   /// trae los estados del pago
 
         if(event.type === "charge:failed"){
             console.log("pago fallido");
-
-            console.log("DOMINIO",DOMAIN);
-            return res.redirect(DOMAIN);
         };
 
         res.status(200).send("ok");
