@@ -31,8 +31,8 @@ route.post("/create-charge", async(req,res)=>{   // ruta de pago http://localhos
             customer_id: "idusuaro",
             customer_name: "Maxi Meder"
         },
-        redirect_url: `${DOMAIN}/success-payment`, // cuando el pago se finaliza le sale un boton para continuar. Esa url es donde lo va a redirigir el boton. NOTA: tiene que ser un dominio https. Si no coinbase no redirecciona. 
-        cancel_url: `${DOMAIN}/paycrypto/cancel-payment`,  // cuando se calcele el pago, va a redireccionar a esta ruta.
+        redirect_url: `${DOMAIN}`, // ${DOMAIN}/perfilusuario/pago   cuando el pago se finaliza le sale un boton para continuar. Esa url es donde lo va a redirigir el boton. NOTA: tiene que ser un dominio https. Si no coinbase no redirecciona. 
+        cancel_url: `${DOMAIN}`,  // cuando se calcele el pago, va a redireccionar a esta ruta.
     };
 
     const charge = await Charge.create(chargeData);  // le pasamos los datos para que cree la orden de pago. charge es un json con toda la info. donde vamos a tomar el parametro hosted_url que contiene la url que nos manda a la pasarela de pago
@@ -49,21 +49,23 @@ route.post("/create-charge", async(req,res)=>{   // ruta de pago http://localhos
 });
 
 
-route.get("/succes-payment", async (req,res)=>{ // que redireccione a una pag cuando el pago se confirme
+//---------------esto creo que no se va a usar.-----------------------------------
 
-    // res.send("payment succesfull");
+// route.get("/succes-payment", async (req,res)=>{ // que redireccione a una pag cuando el pago se confirme
 
-    res.redirect("https://eventix-prueba.vercel.app"); // que redireccione al perfil del usuario dnde va a poder ver los tickets comprados.
-});
+//     // res.send("payment succesfull");
 
-route.get("/cancel-payment", async(req,res)=>{ // lo mismo pero cuando el pago se cancele. 
+//     res.redirect("https://eventix-prueba.vercel.app"); // que redireccione al perfil del usuario dnde va a poder ver los tickets comprados.
+// });
+
+// route.get("/cancel-payment", async(req,res)=>{ // lo mismo pero cuando el pago se cancele. 
  
-    // res.send("cancel payment");
-    console.log("DOMINIO",DOMAIN);
-    return res.redirect(DOMAIN);
-});
+//     // res.send("cancel payment");
+//     console.log("DOMINIO",DOMAIN);
+//     return res.redirect(DOMAIN);
+// });
 
-//--------------------------------------------
+//-------------------------------------------------------------------------------------------
 
 route.post("/payment-handler", (req,res)=>{   /// trae los estados del pago
 
@@ -83,16 +85,21 @@ route.post("/payment-handler", (req,res)=>{   /// trae los estados del pago
 
         if(event.type === "charge:confirmed"){  // se confirmo el pago
             
+            // creo el ticket y lo guardo en la BD 
             console.log("pago realizado");  
             // res.send("charge is confirmed"); //mostrar en el perfil del usuario este mensaje y con un condicional si es asi que se envie el ticket.
         };
 
         if(event.type === "charge:pending"){
+
+            // envio el mensaje de pendiente al prefil
             console.log("pago pendiente");
             // res.send("charge is pending"); //mostrar en el perfil del usuario este mensaje
         };
 
         if(event.type === "charge:failed"){
+            
+            // envio el mensaje al perfil de canelado . 
             console.log("pago fallido");
         };
 
