@@ -64,11 +64,11 @@ route.get("/cancel", async(req,res)=>{ // lo mismo pero cuando el pago se cancel
 
 //--------------------------------------------
 
-route.post("/payment-handler",async (req,res)=>{   /// trae los estados del pago
+route.post("/payment-handler", (req,res)=>{   /// trae los estados del pago
 
-    const rawBody = await req.rawBody;  // coinbase envia el estado de la transaccion en formato binario. 
+    const rawBody = req.rawBody;  // coinbase envia el estado de la transaccion en formato binario. 
 
-    const signature = req.header['x-cc-webhook-signature'];
+    const signature = req.headers['x-cc-webhook-signature'];
 
     const webhookSecret = COINBASE_WEBHOOK_SECRET;
 
@@ -98,7 +98,7 @@ route.post("/payment-handler",async (req,res)=>{   /// trae los estados del pago
         res.status(200).send("ok");
 
     } catch (error) {
-        console.log("fail");
+        console.log("fail",error);
         res.status(500).send(error.message);
     }
 });
