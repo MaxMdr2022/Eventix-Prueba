@@ -32,7 +32,7 @@ route.post("/create-charge", async(req,res)=>{   // ruta de pago http://localhos
             customer_name: "Maxi Meder"
         },
         redirect_url: `${DOMAIN}/success-payment`, // cuando el pago se finaliza le sale un boton para continuar. Esa url es donde lo va a redirigir el boton. NOTA: tiene que ser un dominio https. Si no coinbase no redirecciona. 
-        cancel_url: `${DOMAIN}/cancel-payment`,  // cuando se calcele el pago, va a redireccionar a esta ruta.
+        cancel_url: `${DOMAIN}/paycrypto/cancel-payment`,  // cuando se calcele el pago, va a redireccionar a esta ruta.
     };
 
     const charge = await Charge.create(chargeData);  // le pasamos los datos para que cree la orden de pago. charge es un json con toda la info. donde vamos a tomar el parametro hosted_url que contiene la url que nos manda a la pasarela de pago
