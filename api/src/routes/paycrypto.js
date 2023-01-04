@@ -59,7 +59,7 @@ route.get("/succes-payment", async (req,res)=>{ // que redireccione a una pag cu
 route.get("/cancel-payment", async(req,res)=>{ // lo mismo pero cuando el pago se cancele. 
  
     // res.send("cancel payment");
-    return res.redirect("/");
+    return res.redirect(DOMAIN);
 });
 
 //--------------------------------------------
