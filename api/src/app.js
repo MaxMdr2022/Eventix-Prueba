@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
 
+var secure = require('express-force-https');
+
 const cors = require("cors");
 
 require('./db.js');
@@ -25,7 +27,7 @@ const corsOptions ={
 }
 
 server.use(cors(corsOptions));
-
+server.use(secure);
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 server.use(bodyParser.json({ limit: '50mb' }));
 server.use(cookieParser());
