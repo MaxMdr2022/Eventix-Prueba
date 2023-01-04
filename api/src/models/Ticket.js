@@ -8,18 +8,32 @@ module.exports = (sequelize) => {
       allowNull: true,
       primaryKey: true
     },
-    QR: {
-      type: DataTypes.STRING, 
-      allowNull: false,
-    },
+    // QR: {
+    //   type: DataTypes.STRING, 
+    //   allowNull: false,
+    // },
     event: {
-      type: DataTypes.INTEGER, 
-      allowNull: false,
-    },
-    text: {
       type: DataTypes.STRING, 
       allowNull: false,
-    },  
+    },
+    price: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    typeTicket: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    // date: {
+    //   type: DataTypes.STRING,
+    //   // allowNull: false
+    // },
+    // description: {
+    //   type: DataTypes.STRING, 
+    //   allowNull: false,
+    // },  
+  },{
+    timestamps: false
   });
 };
 

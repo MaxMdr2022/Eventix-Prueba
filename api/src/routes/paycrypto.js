@@ -2,7 +2,7 @@ const {Router} = require("express");
 require('dotenv').config();
 const {COINBASE_API_KEY, DOMAIN, COINBASE_WEBHOOK_SECRET} = process.env;
 const {Client, resources, Webhook} = require("coinbase-commerce-node"); // resources son los servicios que ofrece coinbase. Si queremos crear una orden de pago, lo inficamos en resources
-
+const {Ticket} = require("../db");
 
 
 Client.init(COINBASE_API_KEY);  // conectamos a coinbase
@@ -16,7 +16,7 @@ const route = Router();
 route.post("/create-charge", async(req,res)=>{   // ruta de pago http://localhost:3001/paycrypto/create-charge
 
     
-    const {total,name,description} = await req.body;
+    const {total,name,description, typeTicket, price, cantidad} = await req.body;
     // console.log(total,name, description);
 
     const chargeData = {                    //  datos del pago
@@ -43,6 +43,19 @@ route.post("/create-charge", async(req,res)=>{   // ruta de pago http://localhos
 
     console.log("url::::",url);
 
+    // creo el ticket y lo guardo en la BD 
+
+    for(let i = 0; i< cantidad; i++){
+
+        await Ticket.create({
+            event: name,
+            price: price,
+            typeTicket: typeTicket
+        })
+    };
+    
+
+
     res.send(url)
     // res.redirect(url); // redireccionamos a la url de la pasarela de pago. 
    
@@ -67,7 +80,7 @@ route.post("/create-charge", async(req,res)=>{   // ruta de pago http://localhos
 
 //-------------------------------------------------------------------------------------------
 
-route.post("/payment-handler", (req,res)=>{   /// trae los estados del pago
+route.post("/payment-handler",(req,res)=>{   /// trae los estados del pago
 
     const rawBody = req.rawBody;  // coinbase envia el estado de la transaccion en formato binario. 
 
@@ -80,12 +93,12 @@ route.post("/payment-handler", (req,res)=>{   /// trae los estados del pago
     try {
         
         event = Webhook.verifyEventBody(rawBody, signature, webhookSecret);  // esta clase recibe por el metodo verifyEventBody: el rewBody (la data que envia coinbase) asignatur y webhooksecret. Es para validar si lo que me envia es valido  
-        console.log("event",event.type);
+        console.log("event",event);
         //comprobamos el tipo de evento, los estados del pago que manda coinbase
 
         if(event.type === "charge:confirmed"){  // se confirmo el pago
-            
-            // creo el ticket y lo guardo en la BD 
+
+            // busco el ticket en la base de datos y lo envio al perfil del usuario y al email
             console.log("pago realizado");  
             // res.send("charge is confirmed"); //mostrar en el perfil del usuario este mensaje y con un condicional si es asi que se envie el ticket.
         };
@@ -99,7 +112,7 @@ route.post("/payment-handler", (req,res)=>{   /// trae los estados del pago
 
         if(event.type === "charge:failed"){
             
-            // envio el mensaje al perfil de canelado . 
+            // envio el mensaje al perfil de canelado . y elimino el ticket de la base de datos
             console.log("pago fallido");
         };
 
