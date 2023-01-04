@@ -72,12 +72,12 @@ route.post("/payment-handler",async (req,res)=>{   /// trae los estados del pago
 
     const webhookSecret = COINBASE_WEBHOOK_SECRET;
 
-    let event = {};  // el estadoo de la transaccion
-    console.log("event");
+    let event;  // el estadoo de la transaccion
+    
     try {
         
         event = Webhook.verifyEventBody(rawBody, signature, webhookSecret);  // esta clase recibe por el metodo verifyEventBody: el rewBody (la data que envia coinbase) asignatur y webhooksecret. Es para validar si lo que me envia es valido  
-    
+        console.log("event",event.type);
         //comprobamos el tipo de evento, los estados del pago que manda coinbase
 
         if(event.type === "charge:confirmed"){  // se confirmo el pago
