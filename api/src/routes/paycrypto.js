@@ -1,7 +1,7 @@
 const {Router} = require("express");
 require('dotenv').config();
-const {COINBASE_API_KEY, DOMAIN} = process.env;
-const {Client, resources} = require("coinbase-commerce-node"); // resources son los servicios que ofrece coinbase. Si queremos crear una orden de pago, lo inficamos en resources
+const {COINBASE_API_KEY, DOMAIN, COINBASE_WEBHOOK_SECRET} = process.env;
+const {Client, resources, Webhook} = require("coinbase-commerce-node"); // resources son los servicios que ofrece coinbase. Si queremos crear una orden de pago, lo inficamos en resources
 
 
 
@@ -61,6 +61,48 @@ route.get("/cancel", async(req,res)=>{ // lo mismo pero cuando el pago se cancel
     // res.send("cancel payment");
     res.redirect("https://eventix-prueba.vercel.app");
 });
+
+//--------------------------------------------
+
+route.post("/payment-handler",async (req,res)=>{   /// trae los estados del pago
+
+    const rawBody = await req.rawBody;  // coinbase envia el estado de la transaccion en formato binario. 
+
+    const signature = req.header['x-cc-webhook-signature'];
+
+    const webhookSecret = COINBASE_WEBHOOK_SECRET;
+
+    let event = {};  // el estadoo de la transaccion
+
+    try {
+        
+        event = Webhook.verifyEventBody(rawBody, signature, webhookSecret);  // esta clase recibe por el metodo verifyEventBody: el rewBody (la data que envia coinbase) asignatur y webhooksecret. Es para validar si lo que me envia es valido  
+    
+        //comprobamos el tipo de evento, los estados del pago que manda coinbase
+
+        if(event.type === "charge:confirmed"){  // se confirmo el pago
+            
+            console.log("pago realizado");  
+            // res.send("charge is confirmed"); //mostrar en el perfil del usuario este mensaje y con un condicional si es asi que se envie el ticket.
+        };
+
+        if(event.type === "charge:pending"){
+            console.log("pago pendiente");
+            // res.send("charge is pending"); //mostrar en el perfil del usuario este mensaje
+        };
+
+        if(event.type === "charge:failed"){
+            console.log("pago fallido");
+        };
+
+        res.status(200).send("ok");
+
+    } catch (error) {
+        console.log("fail");
+        res.status(500).send(error.message);
+    }
+});
+
 
 module.exports = route;
 
