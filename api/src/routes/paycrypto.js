@@ -135,6 +135,9 @@ route.post("/payment-handler", async(req,res)=>{   /// trae los estados del pago
             //     await Ticket.update({paymentMade: true},{ where: {[Op.and]: [{usersId: 01},{id:event.customer_id_ticket[i]}]}});
             // };
         
+            //PARA HACER LA PRUEBA BUSCAR POR EL ID DEL USER Y MODIFICAR EN TRUE EL QR
+
+            await Ticket.update({paymentMade: true},{ where: {usersId: 01}})
         };
 
         if(event.type === "charge:pending"){
@@ -153,7 +156,10 @@ route.post("/payment-handler", async(req,res)=>{   /// trae los estados del pago
 
             //     await Ticket.destroy ({ where: {[Op.and]: [{usersId: 01},{id:event.customer_id_ticket[i]}]}})
             // }
-            //                                       userId: event.metadata.customer_id
+            //    userId: event.metadata.customer_id
+
+
+            await Ticket.destroy ({ where: {usersId: 01}})
         };
 
         res.status(200).send("ok");

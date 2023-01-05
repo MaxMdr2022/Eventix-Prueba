@@ -7,7 +7,7 @@ import { paymentHandler } from "../../Redux/actions";
 export default function Perfil () {
 
     const dispatch = useDispatch();
-    const userId = 01
+    const userId = 1
 
 
     useEffect(()=> {
