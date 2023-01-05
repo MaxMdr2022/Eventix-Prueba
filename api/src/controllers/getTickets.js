@@ -22,11 +22,11 @@ const getTickets = async(userId) =>{
                 console.log("ticketid", ticket[i].id);
                 console.log("qr::::", qr);
 
-                ticketUser.push({
-                    ticket: ticket[i],
-                    QR: qr
-                });
-
+                ticketUser.push(qr);
+// {
+//                     ticket: ticket[i],
+//                     QR: qr
+//                 }
             };
 
         } catch (error) {
