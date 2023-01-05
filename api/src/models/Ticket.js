@@ -9,7 +9,7 @@ module.exports = (sequelize) => {
       primaryKey: true
     },
     QR: {
-      type: DataTypes.TEXT, 
+      type: DataTypes.STRING(500), 
       allowNull:false
     },
     event: {

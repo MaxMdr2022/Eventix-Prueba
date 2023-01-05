@@ -44,6 +44,7 @@ route.post("/create-charge", async(req,res)=>{   // ruta de pago http://localhos
             for(let i=0; i<ticket.length; i++){
 
                 console.log("ticketid", ticket[i].id);
+                console.log("qr::::", qr);
                 await Ticket.update({QR: qr},{ where: {id: ticket[i].id}})
 
             };
