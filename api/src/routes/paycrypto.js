@@ -57,16 +57,16 @@ route.post("/create-charge", async(req,res)=>{   // ruta de pago http://localhos
     
     for(let i=0; i<ticket.length; i++){
 
-        qrGenerate("hola");
+        qrGenerate({
+            event: name,
+            price: price,
+            typeTicket: typeTicket,
+            usersId: 01,
+            ticketId: ticket[i].id
+        });
     };
     
-    // {
-    //     event: name,
-    //     price: price,
-    //     typeTicket: typeTicket,
-    //     usersId: 01,
-    //     ticketId: ticket[i].id
-    // }
+    
     //-------------------------------------------------------------------------------------------------------
 
     
