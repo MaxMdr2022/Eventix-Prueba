@@ -222,7 +222,7 @@ export const payCrypto = (data) =>{
 
 export const paymentHandler = () => {
 
-  return async function (){
+  return async function (dispatch){
 
     try {
       
