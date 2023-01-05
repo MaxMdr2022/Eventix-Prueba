@@ -8,10 +8,6 @@ module.exports = (sequelize) => {
       allowNull: true,
       primaryKey: true
     },
-    QR: {
-      type: DataTypes.STRING(500), 
-      allowNull:false
-    },
     event: {
       type: DataTypes.STRING, 
       allowNull: false,
