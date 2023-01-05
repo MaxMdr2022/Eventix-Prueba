@@ -38,7 +38,7 @@ const getTickets = async(userId) =>{
     for(let i=0; i<ticket.length; i++){   // invoco la funcion por cada ticket que me traje de la BD y le paso la data que va a tener el QR
                                      
         qrGenerate(`                      
-            event: ${ticket[i].name},
+            event: ${ticket[i].event},
             price: ${ticket[i].price},
             typeTicket: ${ticket[i].typeTicket},
             usersId: 01,
