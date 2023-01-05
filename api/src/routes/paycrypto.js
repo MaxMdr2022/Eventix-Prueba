@@ -4,7 +4,7 @@ const {COINBASE_API_KEY, DOMAIN, COINBASE_WEBHOOK_SECRET} = process.env;
 const {Client, resources, Webhook} = require("coinbase-commerce-node"); // resources son los servicios que ofrece coinbase. Si queremos crear una orden de pago, lo inficamos en resources
 const {Ticket} = require("../db");
 const { Op } = require("sequelize");
-
+const qrCode = require("qrcode");
 
 Client.init(COINBASE_API_KEY);  // conectamos a coinbase
 
@@ -17,9 +17,7 @@ const route = Router();
 route.post("/create-charge", async(req,res)=>{   // ruta de pago http://localhost:3001/paycrypto/create-charge
 
     const {total,name,description, typeTicket, price, cantidad} = await req.body;
-    // creo el ticket y lo guardo en la BD ----------------------------
-
-    //qr
+    // creo el ticket y lo guardo en la BD ---------------------------
 
 
     for(let i = 0; i< cantidad; i++){
@@ -29,12 +27,44 @@ route.post("/create-charge", async(req,res)=>{   // ruta de pago http://localhos
             price: price,
             typeTicket: typeTicket,
             usersId: 01,
-            QR:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Codigo_QR.svg/2048px-Codigo_QR.svg.png",
+            QR:"empty",
             paymentMade:false
         })
     };
     
     const ticket = await Ticket.findAll({where:{usersId: 01}}); // me traigo el ticket que cree recien para tomar el id y pasarlo a los datos del pago
+    
+    //creo el qr
+
+    const qrGenerate = async text => {
+
+        try {
+            const qr = await qrCode.toDataURL(text);
+
+            for(let i=0; i<ticket.length; i++){
+
+                await Ticket.update({QR: qr},{ where: {id: ticket[i].id}})
+
+            };
+
+        } catch (error) {
+            
+            console.log(error);
+        }
+    }
+    
+    for(let i=0; i<ticket.length; i++){
+
+        qrGenerate({
+            event: name,
+            price: price,
+            typeTicket: typeTicket,
+            usersId: 01,
+            ticketId: ticket[i].id
+        });
+    };
+    
+    
     //-------------------------------------------------------------------------------------------------------
 
     

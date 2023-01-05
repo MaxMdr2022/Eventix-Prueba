@@ -24,6 +24,7 @@
         "express-force-https": "^1.0.0",
         "morgan": "^1.10.0",
         "pg": "^8.5.1",
+        "qrcode": "^1.5.1",
         "sequelize": "^6.3.5"
     },
     "devDependencies": {
