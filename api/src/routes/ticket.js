@@ -12,7 +12,7 @@ route.get("/:userId", async(req,res)=>{
 
 
         const ticket = await getTickets(Number(userId));
-        console.log(ticket);
+        console.log("tickets ruta:" ,ticket);
 
         ticket? res.status(200).json(ticket) : res.status(400).send("No ticket");
 

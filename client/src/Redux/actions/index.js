@@ -225,8 +225,9 @@ export const paymentHandler = (userId) => {
   return async function (dispatch){
 
     try {
+      console.log(userId);
       
-      const info = await axios.get("/ticket/" + userId);
+      const info = await axios.get("ticket/" + userId);
 
       dispatch({
         type: PAYMENT_HANDLER,

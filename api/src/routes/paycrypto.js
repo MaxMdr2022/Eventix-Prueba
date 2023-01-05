@@ -130,10 +130,10 @@ route.post("/payment-handler", async(req,res)=>{   /// trae los estados del pago
 
             // me traigo la info de la bd y creo el qr. Despues desde la action hago un get a otra ruta donde va a preguntar si el ticket de la bd tiene el qr, si no lo tiene es que esta pendiente
             // si lo tiene es que se confirmo el pago y lo renderoza y si no existe el ticket en la bd es que se cancelo y lo borro en el ultimo if.
-            for(let i=0; i<event.customer_id_ticket.length; i++){
+            // for(let i=0; i<event.customer_id_ticket.length; i++){
 
-                await Ticket.update({paymentMade: true},{ where: {[Op.and]: [{usersId: 01},{id:event.customer_id_ticket[i]}]}});
-            };
+            //     await Ticket.update({paymentMade: true},{ where: {[Op.and]: [{usersId: 01},{id:event.customer_id_ticket[i]}]}});
+            // };
         
         };
 
@@ -149,10 +149,10 @@ route.post("/payment-handler", async(req,res)=>{   /// trae los estados del pago
             console.log("pago fallido");
      
 
-            for(let i=0; i<event.customer_id_ticket.length; i++){
+            // for(let i=0; i<event.customer_id_ticket.length; i++){
 
-                await Ticket.destroy ({ where: {[Op.and]: [{usersId: 01},{id:event.customer_id_ticket[i]}]}})
-            }
+            //     await Ticket.destroy ({ where: {[Op.and]: [{usersId: 01},{id:event.customer_id_ticket[i]}]}})
+            // }
             //                                       userId: event.metadata.customer_id
         };
 
