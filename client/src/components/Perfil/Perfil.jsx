@@ -7,9 +7,11 @@ import { paymentHandler } from "../../Redux/actions";
 export default function Perfil () {
 
     const dispatch = useDispatch();
+    const userId = 01
+
 
     useEffect(()=> {
-        dispatch(paymentHandler());
+        dispatch(paymentHandler(userId));
 
     },[dispatch]);
 
@@ -23,7 +25,11 @@ export default function Perfil () {
         <div>
 
             <h1>Perfil</h1>
-            <p>{infoTicket}</p>
+            <p>TICKETS:</p>
+            { infoTicket? infoTicket.map(e => {
+                e.paymentMade === true ? <img src={e.QR} alt= "" /> : <p>pending</p>
+            
+            }): <p>no tickets</p>}
         </div>
         
     )

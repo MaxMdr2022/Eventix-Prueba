@@ -10,7 +10,7 @@ module.exports = (sequelize) => {
     },
     QR: {
       type: DataTypes.STRING, 
-      allowNull: false,
+      allowNull:false
     },
     event: {
       type: DataTypes.STRING, 
@@ -26,6 +26,11 @@ module.exports = (sequelize) => {
     },
     usersId: {
       type: DataTypes.INTEGER
+    },
+    paymentMade: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull:false
     }
     // date: {
     //   type: DataTypes.STRING,

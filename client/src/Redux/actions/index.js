@@ -220,13 +220,13 @@ export const payCrypto = (data) =>{
 };
 
 
-export const paymentHandler = () => {
+export const paymentHandler = (userId) => {
 
   return async function (dispatch){
 
     try {
       
-      const info = await axios.post("paycrypto/payment-handler");
+      const info = await axios.get("/ticket/" + userId);
 
       dispatch({
         type: PAYMENT_HANDLER,

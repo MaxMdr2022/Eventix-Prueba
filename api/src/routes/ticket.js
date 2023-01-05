@@ -4,7 +4,7 @@ const getTickets= require("../controllers/getTickets");
 const route = Router();
 
 
-route.get("/:id", async(req,res)=>{
+route.get("/:userId", async(req,res)=>{
 
     try {
         
