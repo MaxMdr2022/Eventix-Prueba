@@ -26,10 +26,10 @@ export default function Perfil () {
 
             <h1>Perfil</h1>
             <p>TICKETS:</p>
-            { infoTicket.length > 0? infoTicket.map(e => {
+            { infoTicket.length > 0? infoTicket.map(e => 
                 e.paymentMade === true ? <img src={e.QR} alt= "" /> : <p>pending</p>
             
-            }): <p>no tickets</p>}
+            ): <p>no tickets</p>}
         </div>
         
     )
