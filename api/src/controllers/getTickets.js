@@ -15,7 +15,7 @@ const getTickets = async(userId) =>{
     const qrGenerate = async text => {
 
         try {
-            const qr = await qrCode.toDataURL(text);
+            let qr = await qrCode.toDataURL(text);
 
             for(let i=0; i<ticket.length; i++){
 
@@ -29,11 +29,14 @@ const getTickets = async(userId) =>{
 //                 }
             };
 
+            return qr
+
+
         } catch (error) {
             
             console.log(error);
         }
-    }
+    };
     
     for(let i=0; i<ticket.length; i++){   // invoco la funcion por cada ticket que me traje de la BD y le paso la data que va a tener el QR
                                      
@@ -47,7 +50,7 @@ const getTickets = async(userId) =>{
     };
 
 
-    return ticketUser;
+    // return ticketUser;
 
 };
 
