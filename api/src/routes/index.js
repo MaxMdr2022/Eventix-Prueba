@@ -6,6 +6,7 @@ const { Router } = require('express');
 const events = require("./events");
 const filters = require("./filters");
 const paycrypto = require("./paycrypto");
+const ticket = require("./ticket");
 
 const router = Router();
 
@@ -20,6 +21,6 @@ router.use("/filters", filters);
 
 router.use("/paycrypto", paycrypto);
 
-
+router.use("/ticket", ticket)
 
 module.exports = router;

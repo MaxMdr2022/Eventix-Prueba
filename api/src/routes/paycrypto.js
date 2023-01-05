@@ -31,8 +31,8 @@ route.post("/create-charge", async(req,res)=>{   // ruta de pago http://localhos
             customer_id: "idusuaro",
             customer_name: "Maxi Meder"
         },
-        redirect_url: `${DOMAIN}`, // ${DOMAIN}/perfilusuario/pago   cuando el pago se finaliza le sale un boton para continuar. Esa url es donde lo va a redirigir el boton. NOTA: tiene que ser un dominio https. Si no coinbase no redirecciona. 
-        cancel_url: `${DOMAIN}`,  // cuando se calcele el pago, va a redireccionar a esta ruta.
+        redirect_url: `${DOMAIN}/perfil`, // ${DOMAIN}/perfilusuario/pago   cuando el pago se finaliza le sale un boton para continuar. Esa url es donde lo va a redirigir el boton. NOTA: tiene que ser un dominio https. Si no coinbase no redirecciona. 
+        cancel_url: `${DOMAIN}/perfil`,  // cuando se calcele el pago, va a redireccionar a esta ruta.
     };
 
     const charge = await Charge.create(chargeData);  // le pasamos los datos para que cree la orden de pago. charge es un json con toda la info. donde vamos a tomar el parametro hosted_url que contiene la url que nos manda a la pasarela de pago
@@ -43,18 +43,24 @@ route.post("/create-charge", async(req,res)=>{   // ruta de pago http://localhos
 
     console.log("url::::",url);
 
-    // creo el ticket y lo guardo en la BD 
+    // creo el ticket y lo guardo en la BD ----------------------------
+
+
+    //qr
+
+
+
 
     for(let i = 0; i< cantidad; i++){
 
         await Ticket.create({
             event: name,
             price: price,
-            typeTicket: typeTicket
+            typeTicket: typeTicket,
+            usersId: 01,
+            QR:"https://upload.wikimedia.org/wikipedia/commons/d/d7/Commons_QR_code.png"
         })
     };
-    
-
 
     res.send(url)
     // res.redirect(url); // redireccionamos a la url de la pasarela de pago. 
@@ -80,7 +86,7 @@ route.post("/create-charge", async(req,res)=>{   // ruta de pago http://localhos
 
 //-------------------------------------------------------------------------------------------
 
-route.post("/payment-handler",(req,res)=>{   /// trae los estados del pago
+route.post("/payment-handler", (req,res)=>{   /// trae los estados del pago
 
     const rawBody = req.rawBody;  // coinbase envia el estado de la transaccion en formato binario. 
 
@@ -96,11 +102,19 @@ route.post("/payment-handler",(req,res)=>{   /// trae los estados del pago
         console.log("event",event);
         //comprobamos el tipo de evento, los estados del pago que manda coinbase
 
+        let data;
+
         if(event.type === "charge:confirmed"){  // se confirmo el pago
 
-            // busco el ticket en la base de datos y lo envio al perfil del usuario y al email
+            // busco el ticket en la base de datos (ticket.find(where: userId: )) y lo envio al perfil del usuario y al email
+            //const ticket = await getTickets(event.metadata.customer_id)
+            //event.metadata me trae los datos del usuario uso esos datos para buscar el ticket y renderizar el QR o borrarlo en el caso del failed
             console.log("pago realizado");  
-            // res.send("charge is confirmed"); //mostrar en el perfil del usuario este mensaje y con un condicional si es asi que se envie el ticket.
+            // res.send(ticket); //mostrar en el perfil del usuario este mensaje y con un condicional si es asi que se envie el ticket.
+        
+
+            // para hacer las pruebas gratuitas hacer un findAll() y que devuela todos los tickets. despues en el front lo recorro y me quedo solo con el del id del user. 
+            return res.send("pago realizado")
         };
 
         if(event.type === "charge:pending"){
@@ -108,12 +122,19 @@ route.post("/payment-handler",(req,res)=>{   /// trae los estados del pago
             // envio el mensaje de pendiente al prefil
             console.log("pago pendiente");
             // res.send("charge is pending"); //mostrar en el perfil del usuario este mensaje
+
+            return res.send("pago pendiente")
         };
 
         if(event.type === "charge:failed"){
             
             // envio el mensaje al perfil de canelado . y elimino el ticket de la base de datos
+
+            //await Ticket.destroy( {
+            //     where: {usersId: event.metadata.customer_id }
+            // });
             console.log("pago fallido");
+            return res.send("pago fallido")
         };
 
         res.status(200).send("ok");

@@ -54,7 +54,9 @@ export default function Detail() {
       total: (Number(e.precio) * cantidad / 400).toPrecision(3),
       name: eventShowed[0].name,
       description: arr.join(" "),
-
+      typeTicket: e.tipoDeTicket,
+      price: e.precio,
+      cantidad: cantidad
       // img: eventShowed[0].image,
       // user:
       // id_user:

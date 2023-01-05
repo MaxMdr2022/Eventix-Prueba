@@ -18,6 +18,8 @@ export const CREATE_EVENT = "CREATE_EVENT";
 export const GET_ALL_EVENT_LIST = 'GET_ALL_EVENT_LIST';
 
 export const PAY_CRYPTO = "PAY_CRYPTO";
+
+export const PAYMENT_HANDLER = "PAYMENT_HANDLER";
 //-------------------------------------------------
 // const URL = "http://localhost:3001";
 //-------------------------------------------------
@@ -215,4 +217,28 @@ export const payCrypto = (data) =>{
       })
     }
   };
+};
+
+
+export const paymentHandler = () => {
+
+  return async function (){
+
+    try {
+      
+      const info = await axios.post("paycrypto/payment-handler");
+
+      dispatch({
+        type: PAYMENT_HANDLER,
+        payload: info.data
+      })
+
+    } catch (error) {
+      
+      dispatch({
+        type:ERROR,
+        payload: error.message
+      })
+    }
+  }
 };

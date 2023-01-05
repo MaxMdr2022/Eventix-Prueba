@@ -8,10 +8,10 @@ module.exports = (sequelize) => {
       allowNull: true,
       primaryKey: true
     },
-    // QR: {
-    //   type: DataTypes.STRING, 
-    //   allowNull: false,
-    // },
+    QR: {
+      type: DataTypes.STRING, 
+      allowNull: false,
+    },
     event: {
       type: DataTypes.STRING, 
       allowNull: false,
@@ -24,6 +24,9 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    usersId: {
+      type: DataTypes.INTEGER
+    }
     // date: {
     //   type: DataTypes.STRING,
     //   // allowNull: false
