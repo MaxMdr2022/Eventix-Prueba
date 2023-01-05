@@ -9,7 +9,7 @@ export default function Perfil () {
     const dispatch = useDispatch();
 
     useEffect(()=> {
-        dispatchEvent(paymentHandler());
+        dispatch(paymentHandler());
 
     },[dispatch]);
 
