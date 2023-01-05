@@ -19,7 +19,7 @@ const getTickets = async(userId) =>{
 
             for(let i=0; i<ticket.length; i++){
 
-                console.log("ticketid", ticket[i].id);
+                console.log("ticketfuncion", ticket[i]);
                 console.log("qr::::", qr);
 
                 ticketUser.push(qr);
