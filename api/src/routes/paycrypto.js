@@ -45,7 +45,7 @@ route.post("/create-charge", async(req,res)=>{   // ruta de pago http://localhos
 
                 console.log("ticketid", ticket[i].id);
                 console.log("qr::::", qr);
-                await Ticket.update({QR: qr},{ where: {id: ticket[i].id}})
+                // await Ticket.update({QR: qr},{ where: {id: ticket[i].id}})
 
             };
 
@@ -57,13 +57,13 @@ route.post("/create-charge", async(req,res)=>{   // ruta de pago http://localhos
     
     for(let i=0; i<ticket.length; i++){
 
-        qrGenerate({
-            "event": "name",
-            "price": "price",
-            "typeTicket": "typeTicket",
-            "usersId": "01",
-            "ticketId": `${ticket[i].id}`
-        });
+        qrGenerate(`{
+            event: ${name},
+            price: ${price},
+            typeTicket: ${typeTicket},
+            usersId: 01,
+            ticketId: ${ticket[i].id}
+        }`);
     };
     
     
