@@ -33,7 +33,7 @@ route.post("/create-charge", async(req,res)=>{   // ruta de pago http://localhos
     };
     
     const ticket = await Ticket.findAll({where:{usersId: 01}}); // me traigo el ticket que cree recien para tomar el id y pasarlo a los datos del pago
-    
+    console.log("ticketsPay", ticket);
     //creo el qr
 
     const qrGenerate = async text => {
@@ -43,6 +43,7 @@ route.post("/create-charge", async(req,res)=>{   // ruta de pago http://localhos
 
             for(let i=0; i<ticket.length; i++){
 
+                console.log("ticketid", ticket[i].id);
                 await Ticket.update({QR: qr},{ where: {id: ticket[i].id}})
 
             };
