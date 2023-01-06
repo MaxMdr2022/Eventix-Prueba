@@ -19,13 +19,13 @@ route.get("/:userId", async(req,res)=>{
 
         console.log("largoo",ticket.length);
         
-
+for(let i=0; i<ticket.length; i++){ 
 
         const qrGenerate = async text => {
 
             try {
 
-               for(let i=0; i<ticket.length; i++){
+            //    for(let i=0; i<ticket.length; i++){
 
                 let qr = await qrCode.toDataURL(text);
 
@@ -38,7 +38,7 @@ route.get("/:userId", async(req,res)=>{
                     QR: qr
                 })
 
-            }
+            // }
                 
                 
     
@@ -57,7 +57,7 @@ route.get("/:userId", async(req,res)=>{
         };
             // if(ticket)
          // invoco la funcion por cada ticket que me traje de la BD y le paso la data que va a tener el QR
-         for(let i=0; i<ticket.length; i++){                    
+                            
             qrGenerate(`                      
                 event: ${ticket[i].event},
                 price: ${ticket[i].price},
