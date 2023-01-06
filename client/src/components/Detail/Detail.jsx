@@ -92,6 +92,18 @@ export default function Detail() {
     setIsOpen(false);
   }
 
+  let timer = function() {setTimeout(function (){
+
+    return(
+      <div>
+
+        <a href={`${url}`}><button>Buy Ticket</button></a>
+        <button onClick={closeModal}>cancel</button>
+
+      </div>
+    )
+  }, 5000)}
+
   return (
     <div>
 
@@ -153,17 +165,7 @@ export default function Detail() {
             <p>You will be redirected to the Coinbase payment gateway</p>
 
             { 
-              setTimeout(function (){
-
-                return(
-                  <div>
-
-                    <a href={`${url}`}><button>Buy Ticket</button></a>
-                    <button onClick={closeModal}>cancel</button>
-
-                  </div>
-                )
-              }, 5000)
+              timer()
 
             }
 
