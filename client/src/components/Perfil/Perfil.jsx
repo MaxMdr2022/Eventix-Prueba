@@ -36,7 +36,7 @@ export default function Perfil () {
         }); 
     };
     
-    infoTicket? infoTicket : [...info];
+
 
     console.log("infoticket", infoTicket);
 
@@ -53,14 +53,25 @@ export default function Perfil () {
 
            
            {
-            infoTicket.map(e =>
+            infoTicket.length > 0 ? infoTicket.map(e =>
             
-            <div>
-                <p>Event: {e.ticket.event}</p>
+                <div>
+                    <p>Event: {e.ticket.event}</p>
 
-                <img src={e.QR} />
-            </div>
-            )}
+                    <img src={e.QR} />
+                </div>
+                ) :
+
+                info.map(e =>
+                
+                    <div>
+                        <p>Event: {e.ticket.event}</p>
+        
+                        <img src={e.QR} />
+                    </div>
+                )
+                
+            }
            {/*infoTicket?  <img src={infoTicket} /> : <p>no tickets</p>*/}
 
         </div>
