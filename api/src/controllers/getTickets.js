@@ -10,33 +10,33 @@ const getTickets = async(userId) =>{
         where:{usersId: userId}
     });
 
-    let ticketUser = [];
+//     let ticketUser = [];
 
-    const qrGenerate = async text => {
+//     const qrGenerate = async text => {
 
-        try {
-            let qr = await qrCode.toDataURL(text);
+//         try {
+//             let qr = await qrCode.toDataURL(text);
 
-            // for(let i=0; i<ticket.length; i++){
+//             // for(let i=0; i<ticket.length; i++){
 
-                console.log("ticketfuncion", ticket[0]);
-                console.log("qr::::", qr);
+//                 console.log("ticketfuncion", ticket[0]);
+//                 console.log("qr::::", qr);
 
-                ticketUser.push(qr);
-// {
-//                     ticket: ticket[i],
-//                     QR: qr
-//                 }
-            // };
+//                 ticketUser.push(qr);
+// // {
+// //                     ticket: ticket[i],
+// //                     QR: qr
+// //                 }
+//             // };
 
-            return qr
+//             return qr
 
 
-        } catch (error) {
+//         } catch (error) {
             
-            console.log(error);
-        }
-    };
+//             console.log(error);
+//         }
+//     };
     
     // for(let i=0; i<ticket.length; i++){   // invoco la funcion por cada ticket que me traje de la BD y le paso la data que va a tener el QR
                                      
@@ -49,9 +49,9 @@ const getTickets = async(userId) =>{
     //     `);
     //     console.log("ticketevent:", ticket[i].event);
     // };
-    qrGenerate("hola")
+    // qrGenerate("hola")
 
-    // return ticketUser;
+    return ticket;
 
 };
 
