@@ -165,7 +165,7 @@ export default function Detail() {
             <p>You will be redirected to the Coinbase payment gateway</p>
 
             { 
-              timer()
+               timer()
 
             }
 
