@@ -37,7 +37,7 @@ route.get("/:userId", async(req,res)=>{
                 // console.log("ticketfuncion", ticket[0]);
                 // console.log("qr::::", qr);
  
-                return res.status(200).json(ticketUser)
+                // return res.status(200).json(ticketUser)
     
     
             } catch (error) {
@@ -60,6 +60,7 @@ route.get("/:userId", async(req,res)=>{
             // console.log("ticketevent:", ticket[i].event);
         }
 
+        return res.status(200).json(ticketUser)
         // qrGenerate(`                      
         //          event: soda Stereo dfasdagdfggagsgdddddddd,
         //          price: 2000,

@@ -32,7 +32,7 @@ route.post("/create-charge", async(req,res)=>{   // ruta de pago http://localhos
     };
     
     const ticket = await Ticket.findAll({where:{usersId: 01}}); // me traigo el ticket que cree recien para tomar el id y pasarlo a los datos del pago
-    console.log("ticketsPay", ticket);   
+    // console.log("ticketsPay", ticket);   
     
     //-------------------------------------------------------------------------------------------------------
 
