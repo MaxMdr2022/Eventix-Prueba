@@ -15,17 +15,29 @@ route.get("/:userId", async(req,res)=>{
 
         const ticket = await getTickets(Number(userId));
 
+        let ticketUser = []
 
         const qrGenerate = async text => {
 
             try {
-                let qr = await qrCode.toDataURL(text);
 
+                for( let i=0; i<ticket.length; i++){
+
+                    let qr = await qrCode.toDataURL(text);
+
+                    ticketUser.push({
+                        ticket: ticket[i],
+                        QR: qr
+                    })
+
+                }
+                
+                console.log("ticketuserrut",ticketUser);
     
                 // console.log("ticketfuncion", ticket[0]);
-                console.log("qr::::", qr);
+                // console.log("qr::::", qr);
  
-                return res.status(200).json(qr)
+                return res.status(200).json(ticketUser)
     
     
             } catch (error) {
