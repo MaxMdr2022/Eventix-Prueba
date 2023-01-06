@@ -38,7 +38,7 @@ export default function Perfil () {
     
 
 
-    console.log("infoticket", info);
+    console.log("infoticket", ticket);
 
     return (
 
