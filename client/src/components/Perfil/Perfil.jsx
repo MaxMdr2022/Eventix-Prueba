@@ -36,9 +36,9 @@ export default function Perfil () {
     //     }); 
     // };
     
+    const ticketsPurchased = ticket.filter(e => e.ticket.pendingPayment === true || e.ticket.paymentMade === true )
 
-
-    console.log("infoticket", ticket);
+    console.log("infoticket", ticketsPurchased);
 
     return (
 
@@ -52,13 +52,15 @@ export default function Perfil () {
            ): <p>no tickets</p>}*/}
 
            
-           { ticket ?
-            ticket.map(e =>
+           { ticketsPurchased ? 
+
+            ticketsPurchased.map(e =>
                 
                 <div>
-                    <p>Event: {e.ticket.event}</p>
+                    <p>Event: {e.ticket.event}</p> 
+                 
     
-                    { e.ticket.pendingPayment === true ? <p>Pending Payment...</p> : e.ticket.paymentMade === true ? <img src={e.QR} /> : <p>No tickets</p>}
+                    { e.ticket.paymentMade === true ? <img src={e.QR} /> : <p>Pending Payment...</p>}
                 </div>
             ): 
             <p>No tickets</p>
