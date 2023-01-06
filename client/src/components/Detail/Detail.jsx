@@ -155,12 +155,14 @@ export default function Detail() {
             { 
               setTimeout(function (){
 
-                <div>
+                return(
+                  <div>
 
-                  <a href={`${url}`}><button>Buy Ticket</button></a>
-                  <button onClick={closeModal}>cancel</button>
+                    <a href={`${url}`}><button>Buy Ticket</button></a>
+                    <button onClick={closeModal}>cancel</button>
 
-                </div>
+                  </div>
+                )
               }, 5000)
 
             }
