@@ -18,43 +18,46 @@ route.get("/:userId", async(req,res)=>{
         let ticketUser = []
 
         console.log("largoo",ticket.length);
-        for(let i=0; i<ticket.length; i++){
+        
 
 
         const qrGenerate = async text => {
 
-           
+            try {
 
-               
+               for(let i=0; i<ticket.length; i++){
 
-            let qr = await qrCode.toDataURL(text);
-
-            
-            
-            
-            
-            return ticketUser.push({
-                ticket: ticket[i],
-                QR: qr
-            })
+                let qr = await qrCode.toDataURL(text);
 
                 
+                
+                
+                
+                ticketUser.push({
+                    ticket: ticket[i],
+                    QR: qr
+                })
+
+            }
                 
                 
     
                 // console.log("ticketfuncion", ticket[0]);
                 // console.log("qr::::", qr);
  
-                // return res.status(200).json(ticketUser)
+                return res.status(200).json(ticketUser)
     
                     
-            
-        };
+            } catch (error) {
+                
+                console.log(error);
+            }
+        
 
 
         // if(ticket)
          // invoco la funcion por cada ticket que me traje de la BD y le paso la data que va a tener el QR
-                                     
+         for(let i=0; i<ticket.length; i++){                    
             qrGenerate(`                      
                 event: ${ticket[i].event},
                 price: ${ticket[i].price},
@@ -63,11 +66,11 @@ route.get("/:userId", async(req,res)=>{
                 ticketId: ${ticket[i].id}
             `);
             // console.log("ticketevent:", ticket[i].event);
-       
+         }
         };    
 
-        console.log("ticketuserrut",ticketUser);
-        return res.status(200).json(ticketUser)
+        // console.log("ticketuserrut",ticketUser);
+        // return res.status(200).json(ticketUser)
         // qrGenerate(`                      
         //          event: soda Stereo dfasdagdfggagsgdddddddd,
         //          price: 2000,
