@@ -18,23 +18,23 @@ export default function Perfil () {
 
     const info = useSelector(s => s.dataPago);
 
-    let infoTicket = []
+    // let infoTicket = []
 
 
-    if(info.length > 1){
+    // if(info.length > 1){  // sacar esto 
 
-        let infoTicketid = info.map(e => e.ticket.id);
+    //     let infoTicketid = info.map(e => e.ticket.id);
 
-        let infoTicketflat = new Set(infoTicketid.flat());
+    //     let infoTicketflat = new Set(infoTicketid.flat());
 
-        let ids = [...infoTicketflat];
+    //     let ids = [...infoTicketflat];
 
-        infoTicket= ids.map(el => {
+    //     infoTicket= ids.map(el => {
 
-            return info.find(e => e.ticket.id === el)
+    //         return info.find(e => e.ticket.id === el)
 
-        }); 
-    };
+    //     }); 
+    // };
     
 
 
@@ -53,16 +53,7 @@ export default function Perfil () {
 
            
            {
-            infoTicket.length > 0 ? infoTicket.map(e =>
-            
-                <div>
-                    <p>Event: {e.ticket.event}</p>
-
-                    <img src={e.QR} />
-                </div>
-                ) :
-
-                info.map(e =>
+            info.map(e =>
                 
                     <div>
                         <p>Event: {e.ticket.event}</p>
