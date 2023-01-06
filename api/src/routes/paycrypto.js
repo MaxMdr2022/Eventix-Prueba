@@ -27,7 +27,8 @@ route.post("/create-charge", async(req,res)=>{   // ruta de pago http://localhos
             price: price,
             typeTicket: typeTicket,
             usersId: 01,
-            paymentMade:false
+            paymentMade:false,
+            pendingPayment:false
         })
     };
     
@@ -65,8 +66,8 @@ route.post("/create-charge", async(req,res)=>{   // ruta de pago http://localhos
 
     console.log("url::::",url);
 
-    // res.send(url)
-    res.redirect(url); // redireccionamos a la url de la pasarela de pago. 
+    res.send(url)
+    // res.redirect(url); // redireccionamos a la url de la pasarela de pago. 
    
 });
 
@@ -141,7 +142,7 @@ route.post("/payment-handler", async(req,res)=>{   /// trae los estados del pago
 
         if(event.type === "charge:pending"){
 
-        
+            await Ticket.update({pendingPayment: true},{ where: {usersId: 01}})
 
             console.log("pago pendiente");
 

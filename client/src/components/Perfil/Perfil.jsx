@@ -16,7 +16,7 @@ export default function Perfil () {
     },[dispatch]);
 
 
-    const info = useSelector(s => s.dataPago);
+    const ticket = useSelector(s => s.dataPago);
 
     // let infoTicket = []
 
@@ -52,15 +52,16 @@ export default function Perfil () {
            ): <p>no tickets</p>}*/}
 
            
-           {
-            info.map(e =>
+           { ticket ?
+            ticket.map(e =>
                 
-                    <div>
-                        <p>Event: {e.ticket.event}</p>
-        
-                        <img src={e.QR} />
-                    </div>
-                )
+                <div>
+                    <p>Event: {e.ticket.event}</p>
+    
+                    { e.ticket.pendingPayment === true ? <img src={e.QR} /> : <p>Pending Payment...</p>}
+                </div>
+            ): 
+            <p>No tickets</p>
                 
             }
            {/*infoTicket?  <img src={infoTicket} /> : <p>no tickets</p>*/}
