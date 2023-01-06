@@ -47,6 +47,7 @@ const getTickets = async(userId) =>{
             usersId: 01,
             ticketId: ${ticket[i].id}
         `);
+        console.log("ticketevent:", ticket[i].event);
     };
 
 
