@@ -38,18 +38,18 @@ const getTickets = async(userId) =>{
         }
     };
     
-    for(let i=0; i<ticket.length; i++){   // invoco la funcion por cada ticket que me traje de la BD y le paso la data que va a tener el QR
+    // for(let i=0; i<ticket.length; i++){   // invoco la funcion por cada ticket que me traje de la BD y le paso la data que va a tener el QR
                                      
-        qrGenerate(`                      
-            event: ${ticket[i].event},
-            price: ${ticket[i].price},
-            typeTicket: ${ticket[i].typeTicket},
-            usersId: 01,
-            ticketId: ${ticket[i].id}
-        `);
-        console.log("ticketevent:", ticket[i].event);
-    };
-
+    //     qrGenerate(`                      
+    //         event: ${ticket[i].event},
+    //         price: ${ticket[i].price},
+    //         typeTicket: ${ticket[i].typeTicket},
+    //         usersId: 01,
+    //         ticketId: ${ticket[i].id}
+    //     `);
+    //     console.log("ticketevent:", ticket[i].event);
+    // };
+    qrGenerate("hola")
 
     // return ticketUser;
 
