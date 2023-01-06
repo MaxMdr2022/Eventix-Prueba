@@ -17,9 +17,9 @@ const getTickets = async(userId) =>{
         try {
             let qr = await qrCode.toDataURL(text);
 
-            for(let i=0; i<ticket.length; i++){
+            // for(let i=0; i<ticket.length; i++){
 
-                console.log("ticketfuncion", ticket[i]);
+                console.log("ticketfuncion", ticket[0]);
                 console.log("qr::::", qr);
 
                 ticketUser.push(qr);
@@ -27,7 +27,7 @@ const getTickets = async(userId) =>{
 //                     ticket: ticket[i],
 //                     QR: qr
 //                 }
-            };
+            // };
 
             return qr
 

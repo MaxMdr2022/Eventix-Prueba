@@ -229,6 +229,7 @@ export const paymentHandler = (userId) => {
       
       const info = await axios.get("ticket/" + userId);
 
+      console.log("action info:", info.data);
       dispatch({
         type: PAYMENT_HANDLER,
         payload: info.data
