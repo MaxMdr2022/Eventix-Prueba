@@ -52,7 +52,7 @@ export default function Perfil () {
            ): <p>no tickets</p>}*/}
 
            
-           { ticketsPurchased ? 
+           { ticketsPurchased.length > 0 ? 
 
             ticketsPurchased.map(e =>
                 
