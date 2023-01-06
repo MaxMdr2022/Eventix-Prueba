@@ -17,7 +17,10 @@ route.get("/:userId", async(req,res)=>{
 
         let ticketUser = []
 
+        console.log("largoo",ticket.length);
         for(let i=0; i<ticket.length; i++){
+
+
         const qrGenerate = async text => {
 
             try {
@@ -26,21 +29,25 @@ route.get("/:userId", async(req,res)=>{
 
                 let qr = await qrCode.toDataURL(text);
 
-                ticketUser.push({
+                
+                
+                
+                
+               return ticketUser.push({
                     ticket: ticket[i],
                     QR: qr
-            })
+                })
 
                 
                 
-                console.log("ticketuserrut",ticketUser);
+                
     
                 // console.log("ticketfuncion", ticket[0]);
                 // console.log("qr::::", qr);
  
                 // return res.status(200).json(ticketUser)
     
-                    return
+                    
             } catch (error) {
                 
                 console.log(error);
@@ -61,6 +68,8 @@ route.get("/:userId", async(req,res)=>{
             // console.log("ticketevent:", ticket[i].event);
        
         };    
+
+        console.log("ticketuserrut",ticketUser);
         return res.status(200).json(ticketUser)
         // qrGenerate(`                      
         //          event: soda Stereo dfasdagdfggagsgdddddddd,
