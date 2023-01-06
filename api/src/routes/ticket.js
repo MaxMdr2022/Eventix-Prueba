@@ -54,8 +54,8 @@ route.get("/:userId", async(req,res)=>{
             }
         
 
-
-        // if(ticket)
+        };
+            // if(ticket)
          // invoco la funcion por cada ticket que me traje de la BD y le paso la data que va a tener el QR
          for(let i=0; i<ticket.length; i++){                    
             qrGenerate(`                      
@@ -67,7 +67,7 @@ route.get("/:userId", async(req,res)=>{
             `);
             // console.log("ticketevent:", ticket[i].event);
          }
-        };    
+           
 
         // console.log("ticketuserrut",ticketUser);
         // return res.status(200).json(ticketUser)
