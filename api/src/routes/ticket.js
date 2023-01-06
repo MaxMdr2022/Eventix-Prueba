@@ -38,15 +38,18 @@ for(let i=0; i<ticket.length; i++){
                     QR: qr
                 })
 
-            // }
+            
                 
                 
     
                 // console.log("ticketfuncion", ticket[0]);
                 // console.log("qr::::", qr);
- 
-                return res.status(200).json(ticketUser)
-    
+                if(i == ticket.length -1){
+
+                    return res.status(200).json(ticketUser)
+                }
+                
+            // }
                     
             } catch (error) {
                 
