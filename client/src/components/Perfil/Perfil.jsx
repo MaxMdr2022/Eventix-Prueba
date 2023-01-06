@@ -16,7 +16,27 @@ export default function Perfil () {
     },[dispatch]);
 
 
-    const infoTicket = useSelector(s => s.dataPago);
+    const info = useSelector(s => s.dataPago);
+
+    let infoTicket = []
+
+
+    if(info.length > 1){
+
+        let infoTicketid = info.map(e => e.ticket.id);
+
+        let infoTicketflat = new Set(infoTicketid.flat());
+
+        let ids = [...infoTicketflat];
+
+        infoTicket= ids.map(el => {
+
+            return info.find(e => e.ticket.id === el)
+
+        }); 
+    };
+    
+    infoTicket? infoTicket : [...info];
 
     console.log("infoticket", infoTicket);
 
