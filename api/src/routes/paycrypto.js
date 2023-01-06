@@ -65,8 +65,8 @@ route.post("/create-charge", async(req,res)=>{   // ruta de pago http://localhos
 
     console.log("url::::",url);
 
-    res.send(url)
-    // res.redirect(url); // redireccionamos a la url de la pasarela de pago. 
+    // res.send(url)
+    res.redirect(url); // redireccionamos a la url de la pasarela de pago. 
    
 });
 
@@ -141,6 +141,7 @@ route.post("/payment-handler", async(req,res)=>{   /// trae los estados del pago
 
         if(event.type === "charge:pending"){
 
+        
 
             console.log("pago pendiente");
 
