@@ -15,6 +15,7 @@ export default function Detail() {
   const { id } = useParams()
   const [cantidad, setCantidad] = useState(1);
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [index, setIndex] = useState(false);
   const [info, setInfo] = useState({tipoTicket: "", precio:0 })
 
   useEffect(() => {
@@ -86,22 +87,17 @@ export default function Detail() {
 
   function openModal() {
     setIsOpen(true);
+    timer()
   }
 
   function closeModal() {
     setIsOpen(false);
   }
 
-  let timer = function() {setTimeout(function (){
+  function timer() {setTimeout(function (){
 
-    return(
-      <div>
-
-        <a href={`${url}`}><button>Buy Ticket</button></a>
-        <button onClick={closeModal}>cancel</button>
-
-      </div>
-    )
+    setIndex(true)
+   
   }, 5000)}
 
   return (
@@ -165,7 +161,12 @@ export default function Detail() {
             <p>You will be redirected to the Coinbase payment gateway</p>
 
             { 
-               timer()
+              index? <div>
+
+              <a href={`${url}`}><button>Buy Ticket</button></a>
+              <button onClick={closeModal}>cancel</button>
+      
+            </div> : <p>Generating payment link</p>
 
             }
 
