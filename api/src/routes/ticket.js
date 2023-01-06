@@ -34,7 +34,13 @@ route.get("/:userId", async(req,res)=>{
             }
         };
 
-        qrGenerate("hola")
+        qrGenerate(`                      
+                 event: soda Stereo dfasdagdfggagsgdddddddd,
+                 price: 2000,
+                 typeTicket: dasdas,
+                 usersId: 01,
+                 ticketId: 123456dasdfsadf3234fa23r22fasdf2r
+             `)
 
         // console.log("tickets ruta:" ,ticket);
 
