@@ -27,6 +27,11 @@ module.exports = (sequelize) => {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
       allowNull:false
+    },
+    pendingPayment: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull:false
     }
     // date: {
     //   type: DataTypes.STRING,
