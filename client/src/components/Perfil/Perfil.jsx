@@ -30,7 +30,7 @@ export default function Perfil () {
                 e.ticket.paymentMade === true ? <img src={e.QR} alt= "" /> : <p>pending</p>
             
            ): <p>no tickets</p>}*/}
-           {infoTicket? infoTicket.map( e => <img src={e} />) : <p>no tickets</p>}
+           {infoTicket?  <img src={infoTicket} /> : <p>no tickets</p>}
 
         </div>
         
