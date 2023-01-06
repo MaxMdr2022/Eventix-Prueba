@@ -24,12 +24,12 @@ route.get("/:userId", async(req,res)=>{
 
                
 
-                    let qr = await qrCode.toDataURL(text);
+                let qr = await qrCode.toDataURL(text);
 
-                    ticketUser.push({
-                        ticket: ticket[i],
-                        QR: qr
-                    })
+                ticketUser.push({
+                    ticket: ticket[i],
+                    QR: qr
+            })
 
                 
                 
