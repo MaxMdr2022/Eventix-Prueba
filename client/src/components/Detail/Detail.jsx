@@ -151,8 +151,19 @@ export default function Detail() {
             <p>ARS$ {info.precio * cantidad}</p>
             <p>US$ {Number(info.precio) * cantidad / 400}</p>
             <p>You will be redirected to the Coinbase payment gateway</p>
-            <a href={`${url}`}><button>Buy Ticket</button></a>
-            <button onClick={closeModal}>cancel</button>
+
+            { 
+              setTimeout(function (){
+
+                <div>
+
+                  <a href={`${url}`}><button>Buy Ticket</button></a>
+                  <button onClick={closeModal}>cancel</button>
+
+                </div>
+              }, 5000)
+
+            }
 
           </div>
           
