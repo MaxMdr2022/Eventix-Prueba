@@ -58,7 +58,7 @@ export default function Perfil () {
                 <div>
                     <p>Event: {e.ticket.event}</p>
     
-                    { e.ticket.pendingPayment === true ? <img src={e.QR} /> : <p>Pending Payment...</p>}
+                    { e.ticket.pendingPayment === true ? <p>Pending Payment...</p> : e.ticket.paymentMade === true ? <img src={e.QR} /> : <p>No tickets</p>}
                 </div>
             ): 
             <p>No tickets</p>
