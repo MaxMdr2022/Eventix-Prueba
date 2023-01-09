@@ -68,8 +68,9 @@ route.get("/notification/:infoPago", async(req,res)=>{
                                     subject: "enviado desde node mailer", // Subject line
                                     html: "<b>Hello world?</b>",
                                     text: ` Event: ${ticketUser[i].ticket.event}
-                                    price: ${ticket[i].price}
-                                    typeTicket: ${ticket[i].typeTicket}`, // plain text body
+                                    price: ${ticketUser[i].ticket.price}
+                                    typeTicket: ${ticketUser[i].ticket.typeTicket}
+                                    QR: ${ticketUser[i].QR}`, // plain text body
                                     
                                 };
 
