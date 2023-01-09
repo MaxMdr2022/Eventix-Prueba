@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { paymentHandler } from "../../Redux/actions";
+import { paymentHandler, notificationPayment } from "../../Redux/actions";
 
 
 export default function Perfil () {
@@ -12,7 +12,7 @@ export default function Perfil () {
 
     useEffect(()=> {
         dispatch(paymentHandler(userId));
-
+        dispatch(notificationPayment(ticket))
     },[dispatch]);
 
 

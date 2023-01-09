@@ -1,7 +1,7 @@
 const {Router} = require("express");
 const getTickets= require("../controllers/getTickets");
 const qrCode = require("qrcode");
-
+const {Ticket} = require("../db");
 
 const route = Router();
 
@@ -22,6 +22,11 @@ route.post("/notification", async(req,res)=>{
             if(ticketUser[i].ticket.emailSent === false){
 
                 console.log("tiquet enviado", ticketUser[i].QR);
+
+                console.log("id ticket",ticketUser[i].ticket.id);
+
+                await Ticket.update({emailSent: true},{ where: {id: ticketUser[i].ticket.id}})
+
             }
         }
 
