@@ -141,6 +141,7 @@ route.post("/payment-handler", async(req,res)=>{   /// trae los estados del pago
                             //aca agarro ticketUser y mando por email el qr y la info del ticket. 
 
                            return console.log("segundo......................");
+                           
                         };
                         
 
