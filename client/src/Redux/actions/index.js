@@ -227,11 +227,11 @@ export const paymentHandler = (userId) => {
   return async function (dispatch){
 
     try {
-      console.log(userId);
+      //console.log(userId);
       
       const info = await axios.get("ticket/" + userId);
 
-      console.log("action info:", info.data);
+      //console.log("action info:", info.data);
       dispatch({
         type: PAYMENT_HANDLER,
         payload: info.data
@@ -256,7 +256,7 @@ export const notificationPayment = (infoPago) => {
       
       const info = await axios.post("ticket/notification" , infoPago);
 
-      console.log("action info:", info.data);
+      console.log("action info.data:", info.data);
       
 
     } catch (error) {

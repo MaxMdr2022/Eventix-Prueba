@@ -54,7 +54,7 @@ const getTickets = async(userId) =>{
 
 
     // si no encontro tickets que mande un erro
-    console.log("ticket getTicket", ticket);
+    //console.log("ticket getTicket", ticket);
     return ticket;
 
 };
