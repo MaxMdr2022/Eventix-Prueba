@@ -5,6 +5,31 @@ const qrCode = require("qrcode");
 
 const route = Router();
 
+route.post("/notification", async(req,res)=>{
+
+
+    try {
+        
+
+        const {ticketUser} = req.body;
+
+        
+
+        for(let i= 0; i< ticketUser.length; i++){
+
+            console.log(ticketUser.ticket);
+
+            if(ticketUser[i].ticket.emailSent === false){
+
+                console.log("tiquet enviado", ticketUser[i].QR);
+            }
+        }
+
+    } catch (error) {
+        
+        res.status(500).send(error.message)
+    }
+});
 
 route.get("/:userId", async(req,res)=>{
 
@@ -19,7 +44,7 @@ route.get("/:userId", async(req,res)=>{
 
         console.log("largoo",ticket.length);
         
-for(let i=0; i<ticket.length; i++){ 
+        for(let i=0; i<ticket.length; i++){ 
 
         const qrGenerate = async text => {
 

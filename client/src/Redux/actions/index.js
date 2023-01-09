@@ -20,6 +20,8 @@ export const GET_ALL_EVENT_LIST = 'GET_ALL_EVENT_LIST';
 export const PAY_CRYPTO = "PAY_CRYPTO";
 
 export const PAYMENT_HANDLER = "PAYMENT_HANDLER";
+
+export const NOTIFICATION_PAYMENT = "NOTIFICATION_PAYMENT";
 //-------------------------------------------------
 // const URL = "http://localhost:3001";
 //-------------------------------------------------
@@ -234,6 +236,28 @@ export const paymentHandler = (userId) => {
         type: PAYMENT_HANDLER,
         payload: info.data
       })
+
+    } catch (error) {
+      
+      dispatch({
+        type:ERROR,
+        payload: error.message
+      })
+    }
+  }
+};
+
+export const notificationPayment = (infoPago) => {
+
+  return async function (dispatch){
+
+    try {
+      console.log("info action:", infoPago);
+      
+      const info = await axios.post("ticket/notification" , infoPago);
+
+      console.log("action info:", info.data);
+      
 
     } catch (error) {
       
