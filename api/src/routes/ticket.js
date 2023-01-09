@@ -62,7 +62,7 @@ route.get("/notification/:id", async(req,res)=>{
                         //     }
                         // }
                 
-                        console.log("tiquet enviado", ticketUser[i].QR);
+                        console.log("tiquet enviado");
 
                         return res.status(200).send("oka")
                     }

@@ -256,7 +256,7 @@ export const notificationPayment = (infoPago) => {
       
       const info = await axios.get("ticket/notification/"+  infoPago);
 
-      console.log("action info.data:", info.data);
+      // console.log("action info.data:", info.data);
       
 
     } catch (error) {
