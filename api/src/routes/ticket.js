@@ -64,8 +64,8 @@ route.get("/notification/:infoPago", async(req,res)=>{
                                 const mailOption = {
 
                                     from: 'Eventix', // sender address
-                                    to: "bar@example.com, baz@example.com", // list of receivers
-                                    subject: "enviado desde node mailer", // Subject line
+                                    to: "medermuebles@hotmail.com", // list of receivers
+                                    subject: "Eventix tickets", // Subject line
                                     html: `<img src="${ticketUser[i].QR}" />`,
                                     text: ` Event: ${ticketUser[i].ticket.event}
                                     price: ${ticketUser[i].ticket.price}
