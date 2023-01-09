@@ -99,9 +99,9 @@ route.get("/notification/:id", async(req,res)=>{
 
     try {
         
-        const {userId} = req.params;
+        const {infoPago} = req.params;
 
-        console.log("id0", userId);
+        console.log("id0", infoPago);
 
         
         // const ticket = await getTickets(Number(userId));
