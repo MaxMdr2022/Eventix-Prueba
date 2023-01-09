@@ -4,6 +4,7 @@ const {COINBASE_API_KEY, DOMAIN, COINBASE_WEBHOOK_SECRET} = process.env;
 const {Client, resources, Webhook} = require("coinbase-commerce-node"); // resources son los servicios que ofrece coinbase. Si queremos crear una orden de pago, lo inficamos en resources
 const {Ticket} = require("../db");
 const { Op } = require("sequelize");
+const qrCode = require("qrcode");
 
 
 Client.init(COINBASE_API_KEY);  // conectamos a coinbase
@@ -108,6 +109,66 @@ route.post("/payment-handler", async(req,res)=>{   /// trae los estados del pago
 
 
         if(event.type === "charge:confirmed"){  // se confirmo el pago
+
+            //me traigo la info que necesito para crear el qr y creo aca el qr. y lo meto al email. Sin hacer el res en qr solo meto la variable en el mail y hago ek res del email.
+            // el otro qr lo dejo que es el que se envia al perfil.
+            
+            const ticket = 1; // la cantidad de tickets que me llega por metadata.
+
+            let ticketUser = [];
+
+            for(let i=0; i<ticket.length; i++){ 
+    
+                const qrGenerate = async text => {
+        
+                    try {
+        
+                    
+        
+                        let qr = await qrCode.toDataURL(text);
+                        
+                        ticketUser.push({
+                            ticket: ticket[i],
+                            QR: qr
+                        })
+        
+                        // console.log("ticketfuncion", ticket[0]);
+                        console.log("qr::::payment", qr)
+
+                        if(i == ticket.length -1){
+                            
+                            //aca agarro ticketUser y mando por email el qr y la info del ticket. 
+
+                            
+                        }
+                        
+
+                            
+                    } catch (error) {
+                        
+                        console.log(error);
+                    }
+    
+                };
+                
+                                
+                // le paaso la data de metadata
+                qrGenerate(`                      
+                    event: soda stereo,
+                    price: 2000,
+                    typeTicket: entrada general,
+                    usersId: 01,
+                    ticketId: 12345678abcde
+                `);
+                // console.log("ticketevent:", ticket[i].event);
+            };
+                
+        
+          
+          
+
+            //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
             // busco el ticket en la base de datos (ticket.find(where: userId: )) y lo envio al perfil del usuario y al email
             //const ticket = await getTickets(event.metadata.customer_id)
