@@ -2,6 +2,8 @@ const {Router} = require("express");
 const getTickets= require("../controllers/getTickets");
 const qrCode = require("qrcode");
 const {Ticket} = require("../db");
+const nodemailer = require("nodemailer");
+
 
 const route = Router();
 
@@ -48,15 +50,48 @@ route.get("/notification/:infoPago", async(req,res)=>{
                                 console.log("tiquet enviado", ticketUser[i].QR);
                 
                                 console.log("id ticket",ticketUser[i].ticket.id);
+                                //.................................
+
+                                const transporter = nodemailer.createTransport({
+                                    host: 'smtp.ethereal.email',
+                                    port: 587,
+                                    auth: {
+                                        user: 'anabel.wolf39@ethereal.email',
+                                        pass: 'NCuQhyp595Wds3UmqQ'
+                                    }
+                                });
+
+                                const mailOption = {
+
+                                    from: 'Eventix', // sender address
+                                    to: "bar@example.com, baz@example.com", // list of receivers
+                                    subject: "enviado desde node mailer", // Subject line
+                                    text: `sodastereo`, // plain text body
+                                    
+                                };
+
+
+                                transporter.sendMail(mailOption, async(err, info) =>{
+
+                                    if(err){
+
+                                        res.status(404).send(err.message);
+                                    }else{
+
+                                        console.log("email enviado");
+                                        await Ticket.update({emailSent: true},{ where: {id: ticketUser[i].ticket.id}})
+                                        res.status(200).json(info);
+                                    }
+                                });
                 
-                                await Ticket.update({emailSent: true},{ where: {id: ticketUser[i].ticket.id}})
+                                
                 
                             }
                         }
                 
                         console.log("tiquet enviado");
 
-                        return res.status(200).send("oka")
+                        // return res.status(200).send("oka")
                     }
                     
                
