@@ -6,26 +6,28 @@ const {Ticket} = require("../db");
 const route = Router();
 
 route.post("/notification", async(req,res)=>{
+    const {infoPago} = req.body;
 
+    console.log("infopago back",infoPago.ticket);
 
     try {
         
 
-        const {ticketUser} = req.body;
+        
 
         
 
-        for(let i= 0; i< ticketUser.length; i++){
+        for(let i= 0; i< infoPago.length; i++){
 
-            console.log(ticketUser.ticket);
+            
 
-            if(ticketUser[i].ticket.emailSent === false){
+            if(infoPago[i].ticket.emailSent === false){
 
-                console.log("tiquet enviado", ticketUser[i].QR);
+                console.log("tiquet enviado", infoPago[i].QR);
 
-                console.log("id ticket",ticketUser[i].ticket.id);
+                console.log("id ticket",infoPago[i].ticket.id);
 
-                await Ticket.update({emailSent: true},{ where: {id: ticketUser[i].ticket.id}})
+                await Ticket.update({emailSent: true},{ where: {id: infoPago[i].ticket.id}})
 
             }
         }
