@@ -66,7 +66,7 @@ route.get("/notification/:infoPago", async(req,res)=>{
                                     from: 'Eventix', // sender address
                                     to: "bar@example.com, baz@example.com", // list of receivers
                                     subject: "enviado desde node mailer", // Subject line
-                                    html: "<b>Hello world?</b>",
+                                    html: `<img src="${ticketUser[i].QR}" />`,
                                     text: ` Event: ${ticketUser[i].ticket.event}
                                     price: ${ticketUser[i].ticket.price}
                                     typeTicket: ${ticketUser[i].ticket.typeTicket}
