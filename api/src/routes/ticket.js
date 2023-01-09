@@ -5,12 +5,12 @@ const {Ticket} = require("../db");
 
 const route = Router();
 
-route.get("/notification/:id", async(req,res)=>{
+route.get("/notification/", async(req,res)=>{
     
 
     try {
         
-        const {userId} = req.params;
+        const {userId} = req.query;
 
 
         const ticket = await getTickets(Number(userId));
@@ -26,23 +26,13 @@ route.get("/notification/:id", async(req,res)=>{
 
                 try {
 
-                
-
                     let qr = await qrCode.toDataURL(text);
 
-                    
-                    
-                    
-                    
                     ticketUser.push({
                         ticket: ticket[i],
                         QR: qr
                     })
 
-                
-                    
-                    
-        
                     // console.log("ticketfuncion", ticket[0]);
                     // console.log("qr::::", qr);
                     if(i == ticket.length -1){

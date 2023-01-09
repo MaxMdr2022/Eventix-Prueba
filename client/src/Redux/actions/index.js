@@ -254,7 +254,7 @@ export const notificationPayment = (infoPago) => {
     try {
       console.log("info action:", infoPago);
       
-      const info = await axios.get("ticket/notification/"+  infoPago);
+      const info = await axios.get(`ticket/notification/?id=${infoPago}`);
 
       // console.log("action info.data:", info.data);
       
