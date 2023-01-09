@@ -51,6 +51,10 @@ const getTickets = async(userId) =>{
     // };
     // qrGenerate("hola")
 
+
+
+    // si no encontro tickets que mande un erro
+    console.log("ticket getTicket", ticket);
     return ticket;
 
 };

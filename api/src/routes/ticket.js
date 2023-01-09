@@ -8,7 +8,7 @@ const route = Router();
 route.post("/notification", async(req,res)=>{
     const {infoPago} = req.body;
 
-    console.log("infopago back",infoPago.ticket);
+    console.log("infopago back",infoPago.ticket.ticket);
 
     try {
         
@@ -17,17 +17,17 @@ route.post("/notification", async(req,res)=>{
 
         
 
-        for(let i= 0; i< infoPago.length; i++){
+        for(let i= 0; i< infoPago.ticket.length; i++){
 
             
 
-            if(infoPago[i].ticket.emailSent === false){
+            if(infoPago[i].ticket.ticket.emailSent === false){
 
-                console.log("tiquet enviado", infoPago[i].QR);
+                console.log("tiquet enviado", infoPago[i].ticket.QR);
 
-                console.log("id ticket",infoPago[i].ticket.id);
+                console.log("id ticket",infoPago[i].ticket.ticket.id);
 
-                await Ticket.update({emailSent: true},{ where: {id: infoPago[i].ticket.id}})
+                await Ticket.update({emailSent: true},{ where: {id: infoPago[i].ticket.ticket.id}})
 
             }
         }
@@ -47,6 +47,7 @@ route.get("/:userId", async(req,res)=>{
 
         const ticket = await getTickets(Number(userId));
 
+        // if el ticket es un string que retorne un res.send(el usuario no tiene tickets)
         let ticketUser = []
 
         console.log("largoo",ticket.length);

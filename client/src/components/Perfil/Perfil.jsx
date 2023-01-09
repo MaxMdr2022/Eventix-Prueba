@@ -8,15 +8,20 @@ export default function Perfil () {
 
     const dispatch = useDispatch();
     const userId = 1
-
+    const ticket = useSelector(s => s.dataPago);
 
     useEffect(()=> {
         dispatch(paymentHandler(userId));
-        dispatch(notificationPayment(ticket))
+
+        if(ticket.length > 0){
+
+            dispatch(notificationPayment({infoPago :ticket}))
+        }
+        
     },[dispatch]);
 
 
-    const ticket = useSelector(s => s.dataPago);
+    
 
     // let infoTicket = []
 

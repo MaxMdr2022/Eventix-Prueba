@@ -17,7 +17,7 @@ const route = Router();
 
 route.post("/create-charge", async(req,res)=>{   // ruta de pago http://localhost:3001/paycrypto/create-charge
 
-    const {total,name,description, typeTicket, price, cantidad} = await req.body;
+    const {total,name,description, typeTicket, price, cantidad} =  req.body;
     // creo el ticket y lo guardo en la BD ---------------------------
 
 
