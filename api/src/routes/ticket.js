@@ -5,79 +5,81 @@ const {Ticket} = require("../db");
 
 const route = Router();
 
-route.get("/notification/", async(req,res)=>{
+route.get("/notification/:id", async(req,res)=>{
     
 
     try {
         
-        const {userId} = req.query;
+        const {userId} = req.params;
 
+        console.log("id0", userId);
 
-        const ticket = await getTickets(Number(userId));
-
-        // if el ticket es un string que retorne un res.send(el usuario no tiene tickets)
-        let ticketUser = []
-
-        console.log("largoo",ticket.length);
         
-        for(let i=0; i<ticket.length; i++){ 
+        // const ticket = await getTickets(Number(userId));
 
-            const qrGenerate = async text => {
+        // // if el ticket es un string que retorne un res.send(el usuario no tiene tickets)
+        // let ticketUser = []
 
-                try {
+        // console.log("largoo",ticket.length);
+        
+        // for(let i=0; i<ticket.length; i++){ 
 
-                    let qr = await qrCode.toDataURL(text);
+        //     const qrGenerate = async text => {
 
-                    ticketUser.push({
-                        ticket: ticket[i],
-                        QR: qr
-                    })
+        //         try {
 
-                    // console.log("ticketfuncion", ticket[0]);
-                    // console.log("qr::::", qr);
-                    if(i == ticket.length -1){
+        //             let qr = await qrCode.toDataURL(text);
 
-                        // for(let i= 0; i< ticketUser.length; i++){
+        //             ticketUser.push({
+        //                 ticket: ticket[i],
+        //                 QR: qr
+        //             })
+
+        //             // console.log("ticketfuncion", ticket[0]);
+        //             // console.log("qr::::", qr);
+        //             if(i == ticket.length -1){
+
+        //                 // for(let i= 0; i< ticketUser.length; i++){
 
             
 
-                        //     if(ticketUser[i].ticket.emailSent === false){
+        //                 //     if(ticketUser[i].ticket.emailSent === false){
                 
-                        //         console.log("tiquet enviado", ticketUser[i].QR);
+        //                 //         console.log("tiquet enviado", ticketUser[i].QR);
                 
-                        //         console.log("id ticket",ticketUser[i].ticket.id);
+        //                 //         console.log("id ticket",ticketUser[i].ticket.id);
                 
-                        //         await Ticket.update({emailSent: true},{ where: {id: ticketUser[i].ticket.id}})
+        //                 //         await Ticket.update({emailSent: true},{ where: {id: ticketUser[i].ticket.id}})
                 
-                        //     }
-                        // }
+        //                 //     }
+        //                 // }
                 
-                        console.log("tiquet enviado");
+        //                 console.log("tiquet enviado");
 
-                        return res.status(200).send("oka")
-                    }
+        //                 return res.status(200).send("oka")
+        //             }
                     
                
                         
-                } catch (error) {
+        //         } catch (error) {
                     
-                    console.log(error);
-                }
+        //             console.log(error);
+        //         }
             
 
-            };
-            // if(ticket)
-         // invoco la funcion por cada ticket que me traje de la BD y le paso la data que va a tener el QR
+        //     };
+        //     // if(ticket)
+        //  // invoco la funcion por cada ticket que me traje de la BD y le paso la data que va a tener el QR
                             
-            qrGenerate(`                      
-                event: ${ticket[i].event},
-                price: ${ticket[i].price},
-                typeTicket: ${ticket[i].typeTicket},
-                usersId: 01,
-                ticketId: ${ticket[i].id}
-            `);
-            // console.log("ticketevent:", ticket[i].event);
-        }
+        //     qrGenerate(`                      
+        //         event: ${ticket[i].event},
+        //         price: ${ticket[i].price},
+        //         typeTicket: ${ticket[i].typeTicket},
+        //         usersId: 01,
+        //         ticketId: ${ticket[i].id}
+        //     `);
+        //     // console.log("ticketevent:", ticket[i].event);
+        // }
            
         
     } catch (error) {
