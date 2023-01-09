@@ -117,13 +117,14 @@ route.post("/payment-handler", async(req,res)=>{   /// trae los estados del pago
 
             let ticketUser = [];
 
+            console.log("cero.................");
             for(let i=0; i<ticket.length; i++){ 
     
                 const qrGenerate = async text => {
         
                    // try {
         
-                        console.log("primero");
+                        console.log("primero..........................");
         
                         let qr = await qrCode.toDataURL(text);
                         
@@ -139,8 +140,8 @@ route.post("/payment-handler", async(req,res)=>{   /// trae los estados del pago
                             
                             //aca agarro ticketUser y mando por email el qr y la info del ticket. 
 
-                            console.log("segundo");
-                        }
+                           return console.log("segundo......................");
+                        };
                         
 
                             

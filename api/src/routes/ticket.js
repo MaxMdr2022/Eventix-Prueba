@@ -54,43 +54,43 @@ route.get("/:userId", async(req,res)=>{
         
         for(let i=0; i<ticket.length; i++){ 
 
-        const qrGenerate = async text => {
+            const qrGenerate = async text => {
 
-            try {
+                try {
 
-            //    for(let i=0; i<ticket.length; i++){
+                //    for(let i=0; i<ticket.length; i++){
 
-                let qr = await qrCode.toDataURL(text);
+                    let qr = await qrCode.toDataURL(text);
 
-                
-                
-                
-                
-                ticketUser.push({
-                    ticket: ticket[i],
-                    QR: qr
-                })
-
-            
-                
-                
-    
-                // console.log("ticketfuncion", ticket[0]);
-                // console.log("qr::::", qr);
-                if(i == ticket.length -1){
-
-                    return res.status(200).json(ticketUser)
-                }
-                
-            // }
                     
-            } catch (error) {
-                
-                console.log(error);
-            }
-        
+                    
+                    
+                    
+                    ticketUser.push({
+                        ticket: ticket[i],
+                        QR: qr
+                    })
 
-        };
+                
+                    
+                    
+        
+                    // console.log("ticketfuncion", ticket[0]);
+                    // console.log("qr::::", qr);
+                    if(i == ticket.length -1){
+
+                        return res.status(200).json(ticketUser)
+                    }
+                    
+                // }
+                        
+                } catch (error) {
+                    
+                    console.log(error);
+                }
+            
+
+            };
             // if(ticket)
          // invoco la funcion por cada ticket que me traje de la BD y le paso la data que va a tener el QR
                             

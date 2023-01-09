@@ -48,7 +48,7 @@ export default function Perfil () {
     
     const ticketsPurchased = ticket.filter(e => e.ticket.pendingPayment === true || e.ticket.paymentMade === true )
 
-    console.log("infoticket", ticketsPurchased);
+    //console.log("infoticket", ticketsPurchased);
 
     return (
 
