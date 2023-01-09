@@ -13,15 +13,7 @@ export default function Perfil () {
     useEffect(()=> {
         dispatch(paymentHandler(userId));
 
-        setTimeout(function (){
-
-            if(ticket.length > 0){
-
-                dispatch(notificationPayment({infoPago :ticket}))
-            }
-           
-        }, 5000)
-        
+        dispatch(notificationPayment(userId))
         
     },[dispatch]);
 

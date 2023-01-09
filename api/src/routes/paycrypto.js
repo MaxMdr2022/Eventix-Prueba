@@ -152,7 +152,7 @@ route.post("/payment-handler", async(req,res)=>{   /// trae los estados del pago
     
                 };
                 
-                                
+                console.log("terero.....................");
                 // le paaso la data de metadata
                 qrGenerate(`                      
                     event: soda stereo,
