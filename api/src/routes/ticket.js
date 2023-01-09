@@ -47,7 +47,7 @@ route.get("/notification/:infoPago", async(req,res)=>{
 
                             if(ticketUser[i].ticket.emailSent === false){
                 
-                                console.log("tiquet enviado", ticketUser[i].QR);
+                                // console.log("tiquet enviado", ticketUser[i].QR);
                 
                                 console.log("id ticket",ticketUser[i].ticket.id);
                                 //.................................
@@ -66,7 +66,10 @@ route.get("/notification/:infoPago", async(req,res)=>{
                                     from: 'Eventix', // sender address
                                     to: "bar@example.com, baz@example.com", // list of receivers
                                     subject: "enviado desde node mailer", // Subject line
-                                    text: `sodastereo`, // plain text body
+                                    html: "<b>Hello world?</b>",
+                                    text: ` Event: ${ticketUser[i].ticket.event}
+                                    price: ${ticket[i].price}
+                                    typeTicket: ${ticket[i].typeTicket}`, // plain text body
                                     
                                 };
 
