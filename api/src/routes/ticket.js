@@ -26,7 +26,7 @@ route.get("/notification/:id", async(req,res)=>{
 
                 try {
 
-                //    for(let i=0; i<ticket.length; i++){
+                
 
                     let qr = await qrCode.toDataURL(text);
 
@@ -47,25 +47,27 @@ route.get("/notification/:id", async(req,res)=>{
                     // console.log("qr::::", qr);
                     if(i == ticket.length -1){
 
-                        for(let i= 0; i< ticketUser.length; i++){
+                        // for(let i= 0; i< ticketUser.length; i++){
 
             
 
-                            if(ticketUser[i].ticket.emailSent === false){
+                        //     if(ticketUser[i].ticket.emailSent === false){
                 
-                                console.log("tiquet enviado", ticketUser[i].QR);
+                        //         console.log("tiquet enviado", ticketUser[i].QR);
                 
-                                console.log("id ticket",ticketUser[i].ticket.id);
+                        //         console.log("id ticket",ticketUser[i].ticket.id);
                 
-                                await Ticket.update({emailSent: true},{ where: {id: ticketUser[i].ticket.id}})
+                        //         await Ticket.update({emailSent: true},{ where: {id: ticketUser[i].ticket.id}})
                 
-                            }
-                        }
+                        //     }
+                        // }
                 
-                        
+                        console.log("tiquet enviado", ticketUser[i].QR);
+
+                        return res.status(200).send("oka")
                     }
                     
-                // }
+               
                         
                 } catch (error) {
                     
@@ -90,7 +92,7 @@ route.get("/notification/:id", async(req,res)=>{
         
     } catch (error) {
         
-        res.status(500).send(error.message)
+        res.status(500).json(error.message)
     }
 });
 
