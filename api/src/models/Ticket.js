@@ -36,7 +36,7 @@ module.exports = (sequelize) => {
     emailSent: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
-      allowNull:falses
+      allowNull:false
     }
     // date: {
     //   type: DataTypes.STRING,
