@@ -53,11 +53,12 @@ route.get("/notification/:infoPago", async(req,res)=>{
                                 //.................................
 
                                 const transporter = nodemailer.createTransport({
-                                    host: 'smtp.ethereal.email',
-                                    port: 587,
+                                    host: 'smtp.gmail.com',//smtp.ethereal.email
+                                    port: 465,//587
+                                    secure: true,// true for 465, false for other ports
                                     auth: {
-                                        user: 'anabel.wolf39@ethereal.email',
-                                        pass: 'NCuQhyp595Wds3UmqQ'
+                                        user: 'eventix2022@gmail.com',
+                                        pass: 'oflrteqpuokfdnit'
                                     }
                                 });
 
