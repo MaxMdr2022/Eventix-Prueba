@@ -39,20 +39,20 @@ route.get("/notification/:infoPago", async(req,res)=>{
                     // console.log("qr::::", qr);
                     if(i == ticket.length -1){
 
-                        // for(let i= 0; i< ticketUser.length; i++){
+                        for(let i= 0; i< ticketUser.length; i++){
 
             
 
-                        //     if(ticketUser[i].ticket.emailSent === false){
+                            if(ticketUser[i].ticket.emailSent === false){
                 
-                        //         console.log("tiquet enviado", ticketUser[i].QR);
+                                console.log("tiquet enviado", ticketUser[i].QR);
                 
-                        //         console.log("id ticket",ticketUser[i].ticket.id);
+                                console.log("id ticket",ticketUser[i].ticket.id);
                 
-                        //         await Ticket.update({emailSent: true},{ where: {id: ticketUser[i].ticket.id}})
+                                await Ticket.update({emailSent: true},{ where: {id: ticketUser[i].ticket.id}})
                 
-                        //     }
-                        // }
+                            }
+                        }
                 
                         console.log("tiquet enviado");
 
