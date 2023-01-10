@@ -3,7 +3,8 @@ const getTickets= require("../controllers/getTickets");
 const qrCode = require("qrcode");
 const {Ticket} = require("../db");
 const nodemailer = require("nodemailer");
-
+require('dotenv').config();
+const {PASS_GMAIL, GMAIL} = process.env;
 
 const route = Router();
 
@@ -20,6 +21,13 @@ route.get("/notification/:infoPago", async(req,res)=>{
         const ticket = await getTickets(Number(infoPago));
 
         // if el ticket es un string que retorne un res.send(el usuario no tiene tickets)
+
+        if(typeof ticket === "string"){
+
+            return res.status(400).send("The user has not purchased tickets recently")
+        }  
+
+
         let ticketUser = []
 
         console.log("largoo",ticket.length);
@@ -64,8 +72,8 @@ route.get("/notification/:infoPago", async(req,res)=>{
                                             port: 465,//587
                                             secure: true,// true for 465, false for other ports
                                             auth: {
-                                                user: 'eventix2022@gmail.com',
-                                                pass: 'oflrteqpuokfdnit'
+                                                user: `${GMAIL}`,
+                                                pass: `${PASS_GMAIL}`
                                             }
                                         });
 
@@ -156,6 +164,12 @@ route.get("/:userId", async(req,res)=>{
         const ticket = await getTickets(Number(userId));
 
         // if el ticket es un string que retorne un res.send(el usuario no tiene tickets)
+
+        if(typeof ticket === "string"){
+
+            return res.status(400).send("The user has not purchased tickets recently")
+        } 
+
         let ticketUser = []
 
         //console.log("largoo",ticket.length);
