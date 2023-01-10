@@ -26,110 +26,116 @@ route.get("/notification/:infoPago", async(req,res)=>{
         
         for(let i=0; i<ticket.length; i++){ 
 
+            if(ticket[i].emailSent === false){
+                //probar agregar el if emailsent aca para no crear qr de tickets ya enviados 
+                const qrGenerate = async text => {
 
-            //probar agregar el if emailsent aca para no crear qr de tickets ya enviados 
-            const qrGenerate = async text => {
+                    try {
 
-                try {
+                        let qr = await qrCode.toDataURL(text);
 
-                    let qr = await qrCode.toDataURL(text);
+                        ticketUser.push({
+                            ticket: ticket[i],
+                            QR: qr
+                        })
 
-                    ticketUser.push({
-                        ticket: ticket[i],
-                        QR: qr
-                    })
+                        // console.log("ticketfuncion", ticket[0]);
+                        // console.log("qr::::", qr);
+                        if(i == ticket.length -1){
 
-                    // console.log("ticketfuncion", ticket[0]);
-                    // console.log("qr::::", qr);
-                    if(i == ticket.length -1){
+                            for(let i= 0; i< ticketUser.length; i++){
 
-                        // for(let i= 0; i< ticketUser.length; i++){
-
-            
-                           
-                            // if(ticketUser[i].ticket.emailSent === false){// lo remplazo por el de abajo
-                            if(ticket[i].emailSent === false){
                 
-                                // console.log("tiquet enviado", ticketUser[i].QR);
-                
-                                // console.log("id ticket",ticketUser[i].ticket.id);
-                                //.................................
+                            
+                                // if(ticketUser[i].ticket.emailSent === false){// lo remplazo por el de abajo
+                                // if(ticket[i].emailSent === false){
+                    
+                                    // console.log("tiquet enviado", ticketUser[i].QR);
+                    
+                                    // console.log("id ticket",ticketUser[i].ticket.id);
+                                    //.................................
 
-                                const transporter = nodemailer.createTransport({
-                                    host: 'smtp.gmail.com',//smtp.ethereal.email
-                                    port: 465,//587
-                                    secure: true,// true for 465, false for other ports
-                                    auth: {
-                                        user: 'eventix2022@gmail.com',
-                                        pass: 'oflrteqpuokfdnit'
-                                    }
-                                });
+                                    await Ticket.update({emailSent: true},{ where: {id: ticketUser[i].ticket.id}})
 
-                                let mostrarInfo = ticketUser.map(function(info){
-                                    return  '<div>'
-                                                +'<img src='+info.QR+' />' 
-                                            +'</div>';
-                                }).join('')
-                               
-                                const mailOption = {
+                                    if(i == ticketUser.length -1){
 
-                                    from: 'Eventix', // sender address
-                                    to: "pc_escritorio2022@outlook.com", // list of receivers
-                                    subject: "Eventix tickets", // Subject line
-                                    html: `<div><b>QR:</b>${mostrarInfo}</div>`
+                                        const transporter = nodemailer.createTransport({
+                                            host: 'smtp.gmail.com',//smtp.ethereal.email
+                                            port: 465,//587
+                                            secure: true,// true for 465, false for other ports
+                                            auth: {
+                                                user: 'eventix2022@gmail.com',
+                                                pass: 'oflrteqpuokfdnit'
+                                            }
+                                        });
+
+                                        let mostrarInfo = ticketUser.map(function(info){
+                                            return  '<div>'
+                                                        +'<img src='+info.QR+' />' 
+                                                    +'</div>';
+                                        }).join('')
                                     
-                                    // text: ` Event: ${ticketUser[i].ticket.event}
-                                    // price: ${ticketUser[i].ticket.price}
-                                    // typeTicket: ${ticketUser[i].ticket.typeTicket}
-                                    // QR: ${ticketUser[i].QR}`, // plain text body
-                                    
-                                };
+                                        const mailOption = {
+
+                                            from: 'Eventix', // sender address
+                                            to: "pc_escritorio2022@outlook.com", // list of receivers
+                                            subject: "Eventix tickets", // Subject line
+                                            html: `<div><b>QR:</b>${mostrarInfo}</div>`
+                                            
+                                            // text: ` Event: ${ticketUser[i].ticket.event}
+                                            // price: ${ticketUser[i].ticket.price}
+                                            // typeTicket: ${ticketUser[i].ticket.typeTicket}
+                                            // QR: ${ticketUser[i].QR}`, // plain text body
+                                            
+                                        };
 
 
-                                transporter.sendMail(mailOption, async(err, info) =>{
+                                        transporter.sendMail(mailOption, async(err, info) =>{
 
-                                    if(err){
+                                            if(err){
 
-                                        res.status(404).send(err.message);
-                                    }else{
+                                                res.status(404).send(err.message);
+                                            }else{
 
-                                        console.log("email enviado");
-                                        await Ticket.update({emailSent: true},{ where: {id: ticketUser[i].ticket.id}})
-                                        res.status(200).json(info);
+                                                console.log("email enviado");
+                                                
+                                                res.status(200).json(info);
+                                            }
+                                        });
                                     }
-                                });
-                
+                                    
+                                // }
                                 
+                                    
                             }
-                            
-                                
-                        // }
-                
-                        console.log("tiquet enviado");
-
-                        // return res.status(200).send("oka")
-                    }
                     
-               
+                            console.log("tiquet enviado");
+
+                            // return res.status(200).send("oka")
+                        }
                         
-                } catch (error) {
-                    
-                    console.log(error);
-                }
-            
-
-            };
-            // if(ticket)
-         // invoco la funcion por cada ticket que me traje de la BD y le paso la data que va a tener el QR
+                
                             
-            qrGenerate(`                      
-                event: ${ticket[i].event},
-                price: ${ticket[i].price},
-                typeTicket: ${ticket[i].typeTicket},
-                usersId: 01,
-                ticketId: ${ticket[i].id}
-            `);
-            // console.log("ticketevent:", ticket[i].event);
+                    } catch (error) {
+                        
+                        console.log(error);
+                    }
+                
+
+                };
+            
+                // if(ticket)
+                // invoco la funcion por cada ticket que me traje de la BD y le paso la data que va a tener el QR
+                                
+                qrGenerate(`                      
+                    event: ${ticket[i].event},
+                    price: ${ticket[i].price},
+                    typeTicket: ${ticket[i].typeTicket},
+                    usersId: 01,
+                    ticketId: ${ticket[i].id}
+                `);
+                // console.log("ticketevent:", ticket[i].event);
+            }
         }
            
         
