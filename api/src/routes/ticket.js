@@ -24,6 +24,7 @@ route.get("/notification/:infoPago", async(req,res)=>{
 
         if(typeof ticket === "string"){
 
+            console.log("tipeof ticket", typeof ticket === "string");
             return res.status(400).send("The user has not purchased tickets recently")
         }  
 
