@@ -35,7 +35,7 @@ route.get("/notification/:infoPago", async(req,res)=>{
         
         for(let i=0; i<ticket.length; i++){ 
 
-            if(ticket[i].emailSent === false && ticket[i].paimentMade === true){ // && ticket[i].paimentMade === true
+            if(ticket[i].emailSent === false && ticket[i].paymentMade === true){ // && ticket[i].paymentMade === true
                 //probar agregar el if emailsent aca para no crear qr de tickets ya enviados 
                 const qrGenerate = async text => {
 
