@@ -4,7 +4,7 @@ const qrCode = require("qrcode");
 const {Ticket} = require("../db");
 const nodemailer = require("nodemailer");
 require('dotenv').config();
-const {PASS_GMAIL, GMAIL} = process.env;
+const {PASS_GMAIL, GMAIL, EMAIL_PRUEBA} = process.env;
 
 const route = Router();
 
@@ -89,7 +89,7 @@ route.get("/notification/:infoPago", async(req,res)=>{
                                         const mailOption = {
 
                                             from: 'Eventix', // sender address
-                                            to: "pc_escritorio2022@outlook.com", // list of receivers
+                                            to: `${EMAIL_PRUEBA}`, // list of receivers
                                             subject: "Eventix tickets", // Subject line
                                             html: `<div><p>Thanks for your purchase. Enjoy the event :D</p>${mostrarInfo}<p>Eventix</p></div>`
                                             
