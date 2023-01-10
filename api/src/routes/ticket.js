@@ -80,11 +80,9 @@ route.get("/notification/:infoPago", async(req,res)=>{
 
                                         let mostrarInfo = ticketUser.map(function(info){
                                             return  '<div>'
-                                                        +'<p>Thanks for your purchase. Enjoy the event :D</p>'
                                                         +'<p>'+info.ticket.event+'</p>'
                                                         +'<p>QR:</p>'
                                                         +'<img src='+info.QR+' />' 
-                                                        +'<p>Eventix</p>'
                                                     +'</div>';
                                         }).join('')
                                     
@@ -93,7 +91,7 @@ route.get("/notification/:infoPago", async(req,res)=>{
                                             from: 'Eventix', // sender address
                                             to: "pc_escritorio2022@outlook.com", // list of receivers
                                             subject: "Eventix tickets", // Subject line
-                                            html: `<div>${mostrarInfo}</div>`
+                                            html: `<div><p>Thanks for your purchase. Enjoy the event :D</p>${mostrarInfo}<p>Eventix</p></div>`
                                             
                                             // text: ` Event: ${ticketUser[i].ticket.event}
                                             // price: ${ticketUser[i].ticket.price}

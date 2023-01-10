@@ -37,6 +37,11 @@ module.exports = (sequelize) => {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
       allowNull:false
+    },
+    invoiceTicketId: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      allowNull: true,
     }
     // date: {
     //   type: DataTypes.STRING,
