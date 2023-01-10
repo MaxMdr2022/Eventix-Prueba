@@ -34,7 +34,7 @@ route.get("/notification/:infoPago", async(req,res)=>{
         
         for(let i=0; i<ticket.length; i++){ 
 
-            if(ticket[i].emailSent === false){
+            if(ticket[i].emailSent === false){ // && paimentMade === true
                 //probar agregar el if emailsent aca para no crear qr de tickets ya enviados 
                 const qrGenerate = async text => {
 
@@ -58,7 +58,7 @@ route.get("/notification/:infoPago", async(req,res)=>{
                                 // if(ticketUser[i].ticket.emailSent === false){// lo remplazo por el de abajo
                                 // if(ticket[i].emailSent === false){
                     
-                                    // console.log("tiquet enviado", ticketUser[i].QR);
+                                    console.log("tiquet enviado", ticketUser[i].QR);
                     
                                     // console.log("id ticket",ticketUser[i].ticket.id);
                                     //.................................
