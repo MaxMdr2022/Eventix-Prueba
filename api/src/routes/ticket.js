@@ -65,15 +65,18 @@ route.get("/notification/:infoPago", async(req,res)=>{
                                     }
                                 });
 
+                                let mostrarInfo = ticketUser.map(function(info){
+                                    return  '<div>'
+                                                +'<img src='+info.QR+' />' 
+                                            +'</div>';
+                                }).join('')
+                               
                                 const mailOption = {
 
                                     from: 'Eventix', // sender address
                                     to: "pc_escritorio2022@outlook.com", // list of receivers
                                     subject: "Eventix tickets", // Subject line
-                                    html: `<div><b>QR:</b>
-                                    ${ticketUser.map(e => <img src={e.QR} alt= "qr" width="200" /> )}
-                                    
-                                    </div>`
+                                    html: `<div><b>QR:</b>${mostrarInfo}</div>`
                                     
                                     // text: ` Event: ${ticketUser[i].ticket.event}
                                     // price: ${ticketUser[i].ticket.price}
