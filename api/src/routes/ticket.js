@@ -26,6 +26,8 @@ route.get("/notification/:infoPago", async(req,res)=>{
         
         for(let i=0; i<ticket.length; i++){ 
 
+
+            //probar agregar el if emailsent aca para no crear qr de tickets ya enviados 
             const qrGenerate = async text => {
 
                 try {
@@ -41,15 +43,16 @@ route.get("/notification/:infoPago", async(req,res)=>{
                     // console.log("qr::::", qr);
                     if(i == ticket.length -1){
 
-                        for(let i= 0; i< ticketUser.length; i++){
+                        // for(let i= 0; i< ticketUser.length; i++){
 
             
-
-                            if(ticketUser[i].ticket.emailSent === false){
+                           
+                            // if(ticketUser[i].ticket.emailSent === false){// lo remplazo por el de abajo
+                            if(ticket[i].emailSent === false){
                 
                                 // console.log("tiquet enviado", ticketUser[i].QR);
                 
-                                console.log("id ticket",ticketUser[i].ticket.id);
+                                // console.log("id ticket",ticketUser[i].ticket.id);
                                 //.................................
 
                                 const transporter = nodemailer.createTransport({
@@ -68,11 +71,14 @@ route.get("/notification/:infoPago", async(req,res)=>{
                                     to: "pc_escritorio2022@outlook.com", // list of receivers
                                     subject: "Eventix tickets", // Subject line
                                     html: `<div><b>QR:</b>
-                                    <img src="${ticketUser[i].QR}" alt= "qr" width="200" /></div>`,
-                                    text: ` Event: ${ticketUser[i].ticket.event}
-                                    price: ${ticketUser[i].ticket.price}
-                                    typeTicket: ${ticketUser[i].ticket.typeTicket}
-                                    QR: ${ticketUser[i].QR}`, // plain text body
+                                    ${ticketUser.map(e => <img src={e.QR} alt= "qr" width="200" /> )}
+                                    
+                                    </div>`
+                                    
+                                    // text: ` Event: ${ticketUser[i].ticket.event}
+                                    // price: ${ticketUser[i].ticket.price}
+                                    // typeTicket: ${ticketUser[i].ticket.typeTicket}
+                                    // QR: ${ticketUser[i].QR}`, // plain text body
                                     
                                 };
 
@@ -91,9 +97,10 @@ route.get("/notification/:infoPago", async(req,res)=>{
                                 });
                 
                                 
-                
                             }
-                        }
+                            
+                                
+                        // }
                 
                         console.log("tiquet enviado");
 
