@@ -35,7 +35,7 @@ route.get("/notification/:infoPago", async(req,res)=>{
         
         for(let i=0; i<ticket.length; i++){ 
 
-            if(ticket[i].emailSent === false){ // && paimentMade === true
+            if(ticket[i].emailSent === false && ticket[i].paimentMade === true){ // && ticket[i].paimentMade === true
                 //probar agregar el if emailsent aca para no crear qr de tickets ya enviados 
                 const qrGenerate = async text => {
 
@@ -80,7 +80,11 @@ route.get("/notification/:infoPago", async(req,res)=>{
 
                                         let mostrarInfo = ticketUser.map(function(info){
                                             return  '<div>'
+                                                        +'<p>Thanks for your purchase. Enjoy the event :D</p>'
+                                                        +'<p>'+info.ticket.event+'</p>'
+                                                        +'<p>QR:</p>'
                                                         +'<img src='+info.QR+' />' 
+                                                        +'<p>Eventix</p>'
                                                     +'</div>';
                                         }).join('')
                                     
@@ -89,7 +93,7 @@ route.get("/notification/:infoPago", async(req,res)=>{
                                             from: 'Eventix', // sender address
                                             to: "pc_escritorio2022@outlook.com", // list of receivers
                                             subject: "Eventix tickets", // Subject line
-                                            html: `<div><b>QR:</b>${mostrarInfo}</div>`
+                                            html: `<div>${mostrarInfo}</div>`
                                             
                                             // text: ` Event: ${ticketUser[i].ticket.event}
                                             // price: ${ticketUser[i].ticket.price}
